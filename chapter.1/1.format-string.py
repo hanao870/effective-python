@@ -44,6 +44,11 @@ if __name__ == "__main__":
 
         assert old_style == new_style == f_string
 
-    print("-" * 50)
     for i, (item, count) in enumerate(pantry):
         print(f"#{i+1}: " f"{item.title():<10s} = " f"{round(count)}")
+
+    print("-" * 50)
+    # フォーマット指定子オプションに変数を使用
+    places = 3
+    number = 1.23456
+    print(f"My number is {number:.{places}f}")
