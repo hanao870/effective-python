@@ -1,0 +1,56 @@
+// devcontainer.json の詳細は https://aka.ms/vscode-remote/devcontainer.json を参照
+{
+    "name": "Python Development Environment",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    // Set *default* container specific settings.json values on container create.
+    "settings": {
+        "terminal.integrated.profiles.linux": {
+            "bash": {
+                "path": "/bin/bash"
+            }
+        },
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.languageServer": "Default",
+        "python.linting.enabled": true,
+        "python.linting.pylintEnabled": false,
+        "python.linting.flake8Enabled": true,
+        "python.linting.flake8Args": [
+            "--ignore=E501",
+            "--per-file-ignores=__init__.py:F401"
+        ],
+        "python.linting.mypyEnabled": true,
+        "python.linting.mypyArgs": [
+            "--follow-imports=silent",
+            "--ignore-missing-imports",
+            "--show-column-numbers",
+            "--no-pretty",
+            "--strict"
+        ],
+        "python.linting.banditEnabled": true,
+        "python.linting.pydocstyleEnabled": true,
+        "python.linting.lintOnSave": true,
+        "python.formatting.provider": "black",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            // ファイル保存時に isort を実行する設定
+            "source.organizeImports": true
+        }
+    },
+    // コンテナ作成後にインストールする VS Code の拡張機能の ID を記述
+    "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "DavidAnson.vscode-markdownlint",
+        "donjayamanne.githistory",
+        "njpwerner.autodocstring",
+        "oderwat.indent-rainbow"
+    ],
+    // コンテナ作成後に1度だけ実行するコマンドを 'postCreateCommand' に記述
+    "postCreateCommand": "sh .devcontainer/postCreateCommand.sh"
+    // リモートコンテナ接続後に実行するコマンドを 'postStartCommand' に記述
+    // "postStartCommand": "pre-commit install"
+    // 非 root 以外のユーザを使用する場合は 'remoteUser' に記述. 詳細は https://aka.ms/vscode-remote/containers/non-root を参照
+    // "remoteUser": "vscode"
+}

@@ -1,0 +1,65 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+# 参考サイト : https://dev.classmethod.jp/articles/python-git-pre-commit/
+# 参考サイト : https://zenn.dev/yiskw713/articles/3c3b4022f3e3f22d276d
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.2.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-toml
+      - id: check-yaml
+      - id: detect-private-key # 秘密鍵の有無をチェック
+      # - id: end-of-file-fixer # ファイルの末尾が改行かチェック
+      # - id: no-commit-to-branch   # 特定のブランチに直接コミットできないようにする
+      #   args: [--branch, master]  # どのブランチにコミットできないようにするかを設定できる. デフォルトは master/main
+      # - id: check-json  # コメント付き json ではシンタックスエラーとなる
+      # - id: pretty-format-json  # ckeck-json と合わせて使用する必要あり
+      #   args: [--autofix] # json ファイルの自動フォーマット有効
+  # isort Python の import の並びを整形するフォーマッタ
+  - repo: https://github.com/pycqa/isort
+    rev: 5.10.1
+    hooks:
+      - id: isort
+        args: ["--profile", "black"]  # black のフォーマッタとの競合を避ける
+  # black PEP8 準拠の Pytho コードフォーマッタ
+  - repo: https://github.com/psf/black
+    rev: 22.3.0
+    hooks:
+      - id: black # 記述方法は https://black.readthedocs.io/en/stable/integrations/source_version_control.html 参照
+  # mypy Python の静的型チェックツール
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v0.961
+    hooks:
+      - id: mypy
+        args: [--strict, --ignore-missing-imports]
+  # flake8
+  - repo: https://github.com/PyCQA/flake8
+    rev: 4.0.1
+    hooks:
+      - id: flake8
+        # E501 : max-line-length
+        args: [--ignore=E501, "--per-file-ignores=__init__.py:F401"]
+  # pydocstyle https://www.pydocstyle.org/en/latest/usage.html#usage-with-the-pre-commit-git-hooks-framework
+  - repo: https://github.com/pycqa/pydocstyle
+    rev: 6.1.1
+    hooks:
+      - id: pydocstyle
+        args:
+          # 以下のルールは排他のため、どちらか一方(もしくは両方)を無視する
+          # D212 / D213 : モジュールの先頭ドキュメント
+          # D203 / D211 : クラスドキュメント
+          # - --ignore=D212, D203
+          # ignore と convention は排他のため、どちらか一方しか設定できない
+          - --convention=google
+  # コメント付き json のフォーマットチェック
+  - repo: https://gitlab.com/bmares/check-json5
+    rev: v1.0.0
+    hooks:
+    - id: check-json5
+  # markdown のフォーマットチェック
+  - repo: https://github.com/markdownlint/markdownlint
+    rev: v0.11.0
+    hooks:
+      - id: markdownlint
+        args: [-r, ~MD013]
