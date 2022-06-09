@@ -43,3 +43,7 @@ if __name__ == "__main__":
         print("-" * 50)
 
         assert old_style == new_style == f_string
+
+    print("-" * 50)
+    for i, (item, count) in enumerate(pantry):
+        print(f"#{i+1}: " f"{item.title():<10s} = " f"{round(count)}")
