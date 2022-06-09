@@ -23,3 +23,23 @@ if __name__ == "__main__":
 
     assert c_tuple == c_dict == f_string
     assert str_args == str_kw == f_string
+
+    pantry: list[tuple[str, float]] = [
+        ("avocados", 1.25),
+        ("bananas", 2.5),
+        ("cherries", 15),
+    ]
+
+    print("-" * 50)
+
+    for i, (item, count) in enumerate(pantry):
+        old_style = "#%d: %-10s = %d" % (i + 1, item.title(), round(count))
+        new_style = "#{}: {:<10s} = {}".format(i + 1, item.title(), round(count))
+        f_string = f"#{i+1}: {item.title():<10s} = {round(count)}"
+
+        print(f"{old_style=}")
+        print(f"{new_style=}")
+        print(f"{f_string =}")
+        print("-" * 50)
+
+        assert old_style == new_style == f_string
