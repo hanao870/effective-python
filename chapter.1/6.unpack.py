@@ -10,3 +10,7 @@ if __name__ == "__main__":
     first = item[0]
     second = item[1]
     print(f"{first} and {second}")
+
+    # タプルに代入(エラーとなる)
+    pair = ("Chocolate", "Peanut butter")
+    # pair[0] = "Honey"
