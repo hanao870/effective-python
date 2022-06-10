@@ -15,6 +15,18 @@ def bubble_sort_old(a: list[str]) -> None:
                 a[i - 1] = tmp
 
 
+def bubble_sort_unpack(a: list[str]) -> None:
+    """アンパックを用いたバブルソート.
+
+    Args:
+        a (list[str]): ソート対象リスト. ソート結果になる
+    """
+    for _ in range(len(a)):
+        for i in range(1, len(a)):
+            if a[i] < a[i - 1]:
+                a[i - 1], a[i] = a[i], a[i - 1]
+
+
 if __name__ == "__main__":
     snack_calories = {"chips": 140, "popcorn": 80, "nuts": 190}
     items = tuple(snack_calories.items())
@@ -58,3 +70,7 @@ if __name__ == "__main__":
     names1 = ["pretzels", "carrots0", "arugula", "bacon"]
     bubble_sort_old(names1)
     print(names1)
+
+    names2 = ["pretzels", "carrots0", "arugula", "bacon"]
+    bubble_sort_unpack(names2)
+    print(names2)
