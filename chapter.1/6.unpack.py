@@ -1,5 +1,20 @@
 """項目6:複数代入アンパック."""
 
+
+def bubble_sort_old(a: list[str]) -> None:
+    """従来のバブルソート.
+
+    Args:
+        a (list[str]): ソート対象リスト. ソート結果になる
+    """
+    for _ in range(len(a)):
+        for i in range(1, len(a)):
+            if a[i] < a[i - 1]:
+                tmp = a[i]
+                a[i] = a[i - 1]
+                a[i - 1] = tmp
+
+
 if __name__ == "__main__":
     snack_calories = {"chips": 140, "popcorn": 80, "nuts": 190}
     items = tuple(snack_calories.items())
@@ -39,3 +54,7 @@ if __name__ == "__main__":
     print(f"Favorite {type2} is {name2} with {cals2} calories")
     print(f"Favorite {type3} is {name3} with {cals3} calories")
     print("-" * 50)
+
+    names1 = ["pretzels", "carrots0", "arugula", "bacon"]
+    bubble_sort_old(names1)
+    print(names1)
