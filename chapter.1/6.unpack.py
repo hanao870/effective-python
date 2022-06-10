@@ -70,7 +70,18 @@ if __name__ == "__main__":
     names1 = ["pretzels", "carrots0", "arugula", "bacon"]
     bubble_sort_old(names1)
     print(names1)
+    print("-" * 50)
 
     names2 = ["pretzels", "carrots0", "arugula", "bacon"]
     bubble_sort_unpack(names2)
     print(names2)
+    print("-" * 50)
+
+    # アンパックを用いずにタプルを表示
+    snacks = [("bacon", 350), ("donut", 240), ("muffin", 190)]
+    for i in range(len(snacks)):
+        data = snacks[i]
+        name = data[0]
+        calories = data[1]
+        print(f"#{i+1}: {name} has {calories} calories")
+    print("-" * 50)
