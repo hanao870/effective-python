@@ -85,3 +85,8 @@ if __name__ == "__main__":
         calories = data[1]
         print(f"#{i+1}: {name} has {calories} calories")
     print("-" * 50)
+
+    # enumerate による表示
+    # rank の開始インデックスを 1 としている
+    for rank, (name, calories) in enumerate(snacks, 1):
+        print(f"#{rank}: {name} has {calories} calories")
