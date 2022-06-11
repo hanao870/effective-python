@@ -24,3 +24,6 @@ if __name__ == "__main__":
     print(next(it))
     print(next(it))
     print("-" * 50)
+
+    for i, favor in enumerate(favolite_list, 1):
+        print(f"{i}: {favor}")
