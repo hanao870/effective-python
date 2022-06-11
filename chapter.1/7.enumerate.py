@@ -14,3 +14,8 @@ if __name__ == "__main__":
     for favor in favolite_list:
         print(f"{favor} is delicious")
     print("-" * 50)
+
+    for i in range(len(favolite_list)):
+        favor = favolite_list[i]
+        print(f"{i + 1}: {favor}")
+    print("-" * 50)
