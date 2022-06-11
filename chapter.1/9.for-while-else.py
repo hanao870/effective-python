@@ -24,3 +24,16 @@ if __name__ == "__main__":
     else:
         print("For Else block")
     print("-" * 50)
+
+    # else が即実行される
+    for i in []:
+        print("Never runs")
+    else:
+        print("For Else block!!!!")
+
+    # while の先頭で終了しても else が実行
+    while False:
+        print("Never runs")
+    else:
+        print("While Else block!!!")
+    print("-" * 50)
