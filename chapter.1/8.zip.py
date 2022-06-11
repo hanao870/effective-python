@@ -7,9 +7,27 @@ def _usnig_enumerate(data: list[str]) -> None:
     max_count = 0
 
     for i, name in enumerate(data):
-        count = len(data[i])
+        count = len(name)
         if count > max_count:
-            longest_name = data[i]
+            longest_name = name
+            max_count = count
+
+    print(f"{longest_name=}, {max_count=}")
+    print("-" * 50)
+
+
+def _using_zip(data: list[str]) -> None:
+    counts = [len(n) for n in data]
+
+    print(f"{list(zip(data, counts))=}")
+    print("-" * 50)
+
+    longest_name: Optional[str] = None
+    max_count = 0
+
+    for name, count in zip(data, counts):
+        if count > max_count:
+            longest_name = name
             max_count = count
 
     print(f"{longest_name=}, {max_count=}")
@@ -37,3 +55,4 @@ if __name__ == "__main__":
     print("-" * 50)
 
     _usnig_enumerate(names)
+    _using_zip(names)
