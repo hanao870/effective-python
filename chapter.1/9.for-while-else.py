@@ -37,3 +37,16 @@ if __name__ == "__main__":
     else:
         print("While Else block!!!")
     print("-" * 50)
+
+    # 2つの数が互いに素数か判定する
+    a = 4
+    b = 9
+
+    for i in range(2, min(a, b) + 1):
+        print(f"Testing {i}")
+        if a % i == 0 and b % i == 0:
+            print("Not coprime")
+            break
+    else:
+        print("Coprime")
+    print("-" * 50)
