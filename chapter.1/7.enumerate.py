@@ -19,3 +19,8 @@ if __name__ == "__main__":
         favor = favolite_list[i]
         print(f"{i + 1}: {favor}")
     print("-" * 50)
+
+    it = enumerate(favolite_list)
+    print(next(it))
+    print(next(it))
+    print("-" * 50)
