@@ -15,3 +15,12 @@ if __name__ == "__main__":
     else:
         print("While Else block")
     print("-" * 50)
+
+    # break で抜けると else は実行されない
+    for i in range(3):
+        print(f"For Loop {i}")
+        if i == 1:
+            break
+    else:
+        print("For Else block")
+    print("-" * 50)
