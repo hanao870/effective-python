@@ -1,6 +1,22 @@
 """項目9:for と while の後に else は使わない."""
 
 
+def _coprime(a: int, b: int) -> bool:
+    for i in range(2, min(a, b) + 1):
+        if a % i == 0 and b % i == 0:
+            return False
+    return True
+
+
+def _coprime_2(a: int, b: int) -> bool:
+    is_coprime = True
+    for i in range(2, min(a, b) + 1):
+        if a % i == 0 and b % i == 0:
+            is_coprime = False
+            break
+    return is_coprime
+
+
 if __name__ == "__main__":
     for i in range(3):
         print(f"For Loop {i}")
@@ -49,4 +65,8 @@ if __name__ == "__main__":
             break
     else:
         print("Coprime")
+    print("-" * 50)
+
+    print(f"{_coprime(4, 9)=}")
+    print(f"{_coprime_2(3, 6)=}")
     print("-" * 50)
