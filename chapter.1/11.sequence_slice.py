@@ -28,3 +28,9 @@ if __name__ == "__main__":
     print(f"{a[5:]=}")
 
     _print_slice(a)
+
+    # リストの境界を超えたスライス. 欠損要素は無視される
+    first_twenty_items = a[:20]
+    last_twenty_items = a[-20:]
+    print(f"{first_twenty_items=}")
+    print(f"{last_twenty_items=}")
