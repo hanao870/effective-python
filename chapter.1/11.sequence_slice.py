@@ -65,3 +65,12 @@ if __name__ == "__main__":
     print(f"After : {a=}")
     print(f"After : {b=}")
     print("-" * 50)
+
+    # リストの代入は参照の代入となる
+    b = a
+    print(f"Before: {a=}")
+    print(f"Before: {b=}")
+    a[:] = ["201", "202", "203"]
+    print(f"After : {a=}")
+    print(f"After : {b=}")
+    print("-" * 50)
