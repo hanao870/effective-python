@@ -34,3 +34,12 @@ if __name__ == "__main__":
     last_twenty_items = a[-20:]
     print(f"{first_twenty_items=}")
     print(f"{last_twenty_items=}")
+    # インデックスアクセスではエラーとなる
+    # print(f"{a[20]=}")
+
+    # スライスして得られたリストは新しいリスト
+    b = a[3:]
+    print(f"Before    : {b=}")
+    b[1] = "99"
+    print(f"After     : {b=}")
+    print(f"No change : {a=}")
