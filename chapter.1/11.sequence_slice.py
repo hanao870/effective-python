@@ -56,3 +56,12 @@ if __name__ == "__main__":
     a[2:3] = ["47", "11"]
     print(f"After : {a=}")
     print("-" * 50)
+
+    # スライス指定を省略すると元のリストの複製となる
+    b = a[:]
+    print(f"Before: {a=}")
+    print(f"Before: {b=}")
+    a[:] = ["101", "102", "103"]
+    print(f"After : {a=}")
+    print(f"After : {b=}")
+    print("-" * 50)
