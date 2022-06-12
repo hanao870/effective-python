@@ -43,3 +43,16 @@ if __name__ == "__main__":
     b[1] = "99"
     print(f"After     : {b=}")
     print(f"No change : {a=}")
+    print("-" * 50)
+
+    # スライスより短いリストを代入すると短くなる
+    print(f"Before: {a=}")
+    a[2:7] = ["99", "22", "14"]
+    print(f"After : {a=}")
+    print("-" * 50)
+
+    # スライスより長いリストを代入すると長くなる
+    print(f"Before: {a=}")
+    a[2:3] = ["47", "11"]
+    print(f"After : {a=}")
+    print("-" * 50)
