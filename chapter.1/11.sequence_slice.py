@@ -1,6 +1,17 @@
 """項目11:シーケンスをどのようにスライスするか知っておく."""
 
 
+def _print_slice(a: list[str]) -> None:
+    print(f"{a[:]=}")
+    print(f"{a[:5]=}")
+    print(f"{a[:-1]=}")
+    print(f"{a[4:]=}")
+    print(f"{a[-3:]=}")
+    print(f"{a[2:5]=}")
+    print(f"{a[2:-1]=}")
+    print(f"{a[-3:-1]=}")
+
+
 if __name__ == "__main__":
     a = ["a", "b", "c", "d", "e", "f", "g", "h"]
 
@@ -15,3 +26,5 @@ if __name__ == "__main__":
     print(f"{a[:5]=}")
     # 末尾までのスライス a[5:len(a)] と同じ
     print(f"{a[5:]=}")
+
+    _print_slice(a)
