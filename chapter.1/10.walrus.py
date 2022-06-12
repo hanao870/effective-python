@@ -1,14 +1,15 @@
 """項目10:代入式で繰り返しを防ぐ."""
+from my_libs.decolator import func_name
 
 
+@func_name
 def _make_lemonade(count: int) -> None:
-    print("Call _make_lemonade")
-    print("-" * 50)
+    pass
 
 
+@func_name
 def _out_of_stock() -> None:
-    print("Call _out_of_stock")
-    print("-" * 50)
+    pass
 
 
 if __name__ == "__main__":
