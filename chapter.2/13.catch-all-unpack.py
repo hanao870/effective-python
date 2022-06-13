@@ -27,3 +27,19 @@ if __name__ == "__main__":
     *others, second_youngest, youngest = car_ages_descending
     print(f"{others=}, {second_youngest=}, {youngest=}")
     print("-" * 80)
+
+    # catch-all で全取得はできない
+    # *others = car_ages_descending
+    # 複数の catch-all もできない
+    # first, *middle, *second_middle = [1, 2, 3, 4, 5]
+
+    # 複数レベルの構造では複数の catch-all アンパックが可能
+    car_inventory = {
+        "Downtown": ("Silver Shadow", "Pinto", "DMC"),
+        "Airport": ("Skyline", "Viper", "Gremlin", "Nova"),
+    }
+
+    ((loc1, (best1, *rest1)), (loc2, (best2, *rest2))) = car_inventory.items()
+    print(f"Best at {loc1} is {best1}, {len(rest1)} others")
+    print(f"Best at {loc2} is {best2}, {len(rest2)} others")
+    print("-" * 80)
