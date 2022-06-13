@@ -23,3 +23,9 @@ if __name__ == "__main__":
 
     print(f"{ll=}")
     print(f"{m=}")
+
+    # Unicode 文字列を UTF-8 でエンコードした場合はエラーとなる
+    # n = "寿司"
+    # oo = n.encode("utf-8")
+    # pp = oo[::-1]
+    # qq = pp.decode("utf-8")
