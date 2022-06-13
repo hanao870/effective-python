@@ -9,3 +9,10 @@ if __name__ == "__main__":
     print(f"{x=}")
     print(f"{odds=}")
     print(f"{even=}")
+
+    # バイト列の逆順にストライドを使う
+    j = b"mongoose"
+    k = j[::-1]
+
+    print(f"{j=}")
+    print(f"{k=}")
