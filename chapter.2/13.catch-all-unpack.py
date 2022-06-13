@@ -48,3 +48,9 @@ if __name__ == "__main__":
     rest: list[int]  # mypy の型アノテーション必須
     first, second, *rest = [1, 2]
     print(f"{first=}, {second=}, {rest=}")
+
+    # イテレータのアンパック
+    # この例はほとんど使用しない
+    it = iter(range(1, 3))
+    first, second = it
+    print(f"{first=}, {second=}")
