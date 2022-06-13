@@ -1,0 +1,11 @@
+"""項目12:1つの式では、ストライドとスライスを同時に使わない."""
+
+if __name__ == "__main__":
+    x = ["red", "orange", "yellow", "green", "blue", "purple"]
+    # list[start:end:stride] start から end まで stride の増分毎の要素を取得する
+    odds = x[::2]
+    even = x[1::2]
+
+    print(f"{x=}")
+    print(f"{odds=}")
+    print(f"{even=}")
