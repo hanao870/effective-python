@@ -16,6 +16,14 @@ def _complex_stride() -> None:
     print(f"{x[2:2:-2]=}")
     print("-" * 50)
 
+    # ストライドでスライス後、さらにスライスする.
+    # ややこしい!!!!!
+    y = x[::2]
+    z = y[1:-1]
+
+    print(f"{y=}")
+    print(f"{z=}")
+
 
 if __name__ == "__main__":
     x = ["red", "orange", "yellow", "green", "blue", "purple"]
