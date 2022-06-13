@@ -1,4 +1,21 @@
 """項目12:1つの式では、ストライドとスライスを同時に使わない."""
+from my_libs.decolator import func_name
+
+
+@func_name
+def _complex_stride() -> None:
+    x = ["a", "b", "c", "d", "e", "f", "g", "h"]
+    print(f"{x=}")
+    print(f"{x[::2]=}")
+    print(f"{x[::-2]=}")
+    print("-" * 50)
+
+    print(f"{x[2::2]=}")
+    print(f"{x[-2::-2]=}")
+    print(f"{x[-2:2:-2]=}")
+    print(f"{x[2:2:-2]=}")
+    print("-" * 50)
+
 
 if __name__ == "__main__":
     x = ["red", "orange", "yellow", "green", "blue", "purple"]
@@ -29,3 +46,5 @@ if __name__ == "__main__":
     # oo = n.encode("utf-8")
     # pp = oo[::-1]
     # qq = pp.decode("utf-8")
+
+    _complex_stride()
