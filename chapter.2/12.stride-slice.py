@@ -16,3 +16,10 @@ if __name__ == "__main__":
 
     print(f"{j=}")
     print(f"{k=}")
+
+    # Unicode 文字列でもストライドの逆順は有効
+    ll = "寿司"
+    m = ll[::-1]
+
+    print(f"{ll=}")
+    print(f"{m=}")
