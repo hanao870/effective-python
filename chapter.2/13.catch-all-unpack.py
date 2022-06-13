@@ -19,3 +19,11 @@ if __name__ == "__main__":
     print("Using catch-all unpack:")
     print(f"{oldest=}, {second_oldest=}, {others=}")
     print("-" * 80)
+
+    oldest, *others, youngest = car_ages_descending
+    print(f"{oldest=}, {others=}, {youngest=}")
+    print("-" * 80)
+
+    *others, second_youngest, youngest = car_ages_descending
+    print(f"{others=}, {second_youngest=}, {youngest=}")
+    print("-" * 80)
