@@ -43,3 +43,8 @@ if __name__ == "__main__":
     print(f"Best at {loc1} is {best1}, {len(rest1)} others")
     print(f"Best at {loc2} is {best2}, {len(rest2)} others")
     print("-" * 80)
+
+    # 要素が不足する場合は catch-all アンパックは空リストになる
+    rest: list[int]  # mypy の型アノテーション必須
+    first, second, *rest = [1, 2]
+    print(f"{first=}, {second=}, {rest=}")
