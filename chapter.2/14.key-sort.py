@@ -86,3 +86,7 @@ if __name__ == "__main__":
     print(f"Unsorted: {power_tools=}")
     power_tools.sort(key=lambda x: (x.weight, x.name))
     print(f"Sorted  : {power_tools=}")
+
+    # tuple のソートを反転
+    power_tools.sort(key=lambda x: (x.weight, x.name), reverse=True)
+    print(f"Reverse Sorted : {power_tools=}")
