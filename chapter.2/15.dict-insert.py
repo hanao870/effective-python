@@ -1,6 +1,15 @@
 """項目15:dict の挿入順序に依存する場合は注意する."""
 
 
+class MyClass:
+    """クラスのインスタンス辞書の動作確認用."""
+
+    def __init__(self) -> None:
+        """イニシャライザ."""
+        self.alligator = "hatchling"
+        self.elephant = "calf"
+
+
 def _my_func(**kwargs: str) -> None:
     for key, value in kwargs.items():
         print(f"{key} = {value}")
@@ -21,3 +30,8 @@ if __name__ == "__main__":
     print("-" * 50)
 
     _my_func(goose="gosling", kangaroo="joey")
+
+    # クラスのインスタンス辞書は代入順で表示される
+    a = MyClass()
+    for key, value in a.__dict__.items():
+        print(f"{key} = {value}")
