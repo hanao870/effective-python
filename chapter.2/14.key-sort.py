@@ -50,3 +50,10 @@ if __name__ == "__main__":
     # 重さ順にソート
     tools.sort(key=lambda x: x.weight)
     print(f"{'By weight':<{width}}: {tools}")
+
+    places = ["home", "work", "New York", "Paris"]
+    places.sort()
+    print(f"Case sensitive  : {places}")
+    # 大文字小文字を無視
+    places.sort(key=lambda x: x.lower())
+    print(f"Case insensitive: {places}")
