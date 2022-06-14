@@ -16,6 +16,17 @@ def _my_func(**kwargs: str) -> None:
     print("-" * 50)
 
 
+def _popular_ranks(votes: dict[str, int], ranks: dict[str, int]) -> None:
+    names = list(votes.keys())
+    names.sort(key=lambda x: votes[x], reverse=True)
+    for i, name in enumerate(names, 1):
+        ranks[name] = i
+
+
+def _get_winner(ranks: dict[str, int]) -> str:
+    return next(iter(ranks))
+
+
 if __name__ == "__main__":
     baby_name = {"cat": "kitten", "dog": "puppy"}
     # Python 3.5 以前は、辞書への挿入順ではなく Key でソートされる
@@ -35,3 +46,13 @@ if __name__ == "__main__":
     a = MyClass()
     for key, value in a.__dict__.items():
         print(f"{key} = {value}")
+
+    # 動物の赤ちゃんの投票数
+    votes = {"otter": 1281, "polar bear": 587, "fox": 863}
+
+    ranks: dict[str, int] = {}
+    _popular_ranks(votes, ranks)
+    print(ranks)
+    winner = _get_winner(ranks)
+    print(winner)
+    print("-" * 50)
