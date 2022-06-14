@@ -40,7 +40,13 @@ if __name__ == "__main__":
     # ソートメソッドが定義されていないためエラーとなる
     # tools.sort()
 
-    print(f"Unsorted: {repr(tools)}")
+    width = 10
+
+    print(f"{'Unsorted':<{width}}: {repr(tools)}")
     # 名前順にソート
     tools.sort(key=lambda x: x.name)
-    print(f"Sorted  : {tools}")
+    print(f"{'Sorted':<{width}}: {tools}")
+
+    # 重さ順にソート
+    tools.sort(key=lambda x: x.weight)
+    print(f"{'By weight':<{width}}: {tools}")
