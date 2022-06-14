@@ -90,3 +90,19 @@ if __name__ == "__main__":
     # tuple のソートを反転
     power_tools.sort(key=lambda x: (x.weight, x.name), reverse=True)
     print(f"Reverse Sorted : {power_tools=}")
+
+    # 数値にマイナス(-)を使いソートの昇順/降順を反転
+    power_tools.sort(key=lambda x: (-x.weight, x.name))
+    print(f"{power_tools=}")
+
+    # 重さの降順で、名前の昇順
+    # 以下のコードはエラーとなる
+    # power_tools.sort(key=lambda x: (x.weight, -x.name), reverse=True)
+    # print(f"{power_tools=}")
+
+    # 複数回ソートは必要な場合のみ使用する(読みにくい!!)
+    # 名前昇順
+    power_tools.sort(key=lambda x: x.name)
+    # 重さ降順
+    power_tools.sort(key=lambda x: x.weight, reverse=True)
+    print(f"{power_tools=}")
