@@ -57,3 +57,32 @@ if __name__ == "__main__":
     # 大文字小文字を無視
     places.sort(key=lambda x: x.lower())
     print(f"Case insensitive: {places}")
+
+    power_tools = [
+        Tool("drill", 4),
+        Tool("circular saw", 5),
+        Tool("jackhammer", 40),
+        Tool("sander", 4),
+    ]
+
+    # タプルの比較
+    saw = (5, "circular saw")
+    jackhammer = (40, "jackhammer")
+    print(f"{saw=}")
+    print(f"{jackhammer=}")
+    # タプルの第1要素を比較する
+    print(f"{(jackhammer < saw)=}")
+
+    drill = (4, "drill")
+    sander = (4, "sander")
+    print(f"{drill=}")
+    print(f"{sander=}")
+    # 第1要素が同じ場合は第2要素で比較する
+    print(f"{(drill[0] == sander[0])=}")
+    print(f"{(drill[1] < sander[1])=}")
+    print(f"{(drill < sander)=}")
+
+    # 重さ順に、名前でソートする
+    print(f"Unsorted: {power_tools=}")
+    power_tools.sort(key=lambda x: (x.weight, x.name))
+    print(f"Sorted  : {power_tools=}")
