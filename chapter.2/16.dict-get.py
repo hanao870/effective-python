@@ -67,6 +67,19 @@ def _complex_dict_setdefault() -> None:
     print(f"{votes=}")
 
 
+@func_name
+def _setdefault_with_list() -> None:
+    data: dict[str, list[str]] = {}
+    key = "foo"
+    value: list[str] = []
+
+    data.setdefault(key, value)
+    print(f"Before: {data=}, {value=}")
+    # 辞書のリストにも hello が追加される
+    value.append("hello")
+    print(f"After: {data=}, {value=}")
+
+
 if __name__ == "__main__":
     counters = {"pumpernickel": 2, "sourdough": 1}
 
@@ -111,3 +124,5 @@ if __name__ == "__main__":
     _complex_dict_key_error()
     _complex_dict_get()
     _complex_dict_setdefault()
+
+    _setdefault_with_list()
