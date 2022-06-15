@@ -22,3 +22,19 @@ if __name__ == "__main__":
     # key の有無確認 using get
     count = counters.get(key, 0)
     counters[key] = count + 1
+
+    # in / KeyError で count を省いた処理
+    # 同じ key で2回アクセスする処理を記述する必要がある
+    if key not in counters:
+        counters[key] = 0
+    counters[key] += 1
+
+    if key in counters:
+        counters[key] += 1
+    else:
+        counters[key] = 1
+
+    try:
+        counters[key] += 1
+    except KeyError:
+        counters[key] = 1
