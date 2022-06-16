@@ -1,4 +1,6 @@
 """項目17:内部状態の欠損要素を扱うには setdefault ではなく defaultdict を使う."""
+from collections import defaultdict
+
 from my_libs.decolator import func_name
 
 
@@ -10,7 +12,7 @@ class Visits:
 
         辞書を初期化
         """
-        self.data: dict[str, set[str]] = {}
+        self.data: dict[str, set[str]] = defaultdict(set)
 
     def add(self, country: str, city: str) -> None:
         """`country` に `city` を追加する.
@@ -19,8 +21,9 @@ class Visits:
             country (str): 訪問国
             city (str): 都市名
         """
-        city_set = self.data.setdefault(country, set())
-        city_set.add(city)
+        # city_set = self.data.setdefault(country, set())
+        # city_set.add(city)
+        self.data[country].add(city)
 
 
 @func_name
@@ -36,10 +39,23 @@ def _setdefault_demo() -> None:
     print(visits)
 
 
-if __name__ == "__main__":
-    _setdefault_demo()
-
+@func_name
+def _visits_demo_1() -> None:
     visits = Visits()
     visits.add("Russia", "Yekaterinburg")
     visits.add("Tanzania", "Zanzibar")
     print(visits.data)
+
+
+@func_name
+def _visits_demo_2() -> None:
+    visits = Visits()
+    visits.add("England", "Bath")
+    visits.add("England", "London")
+    print(visits.data)
+
+
+if __name__ == "__main__":
+    _setdefault_demo()
+    _visits_demo_1()
+    _visits_demo_2()
