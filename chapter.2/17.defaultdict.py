@@ -1,4 +1,5 @@
 """項目17:内部状態の欠損要素を扱うには setdefault ではなく defaultdict を使う."""
+from my_libs.decolator import func_name
 
 
 class Visits:
@@ -22,7 +23,8 @@ class Visits:
         city_set.add(city)
 
 
-if __name__ == "__main__":
+@func_name
+def _setdefault_demo() -> None:
     visits = {"Mexico": {"Tulum", "Puerto Vallarta"}, "Japan": {"Hakone"}}
 
     visits.setdefault("France", set()).add("Arles")
@@ -32,3 +34,12 @@ if __name__ == "__main__":
     japan.add("Kyoto")
 
     print(visits)
+
+
+if __name__ == "__main__":
+    _setdefault_demo()
+
+    visits = Visits()
+    visits.add("Russia", "Yekaterinburg")
+    visits.add("Tanzania", "Zanzibar")
+    print(visits.data)
