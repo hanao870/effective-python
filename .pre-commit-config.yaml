@@ -13,9 +13,7 @@ repos:
       # - id: end-of-file-fixer # ファイルの末尾が改行かチェック
       # - id: no-commit-to-branch   # 特定のブランチに直接コミットできないようにする
       #   args: [--branch, master]  # どのブランチにコミットできないようにするかを設定できる. デフォルトは master/main
-      # - id: check-json  # コメント付き json ではシンタックスエラーとなる
-      # - id: pretty-format-json  # ckeck-json と合わせて使用する必要あり
-      #   args: [--autofix] # json ファイルの自動フォーマット有効
+      - id: check-json  # コメント付き json ではシンタックスエラーとなる
   # isort Python の import の並びを整形するフォーマッタ
   - repo: https://github.com/pycqa/isort
     rev: 5.10.1
@@ -52,11 +50,6 @@ repos:
           # - --ignore=D212, D203
           # ignore と convention は排他のため、どちらか一方しか設定できない
           - --convention=google
-  # コメント付き json のフォーマットチェック
-  - repo: https://gitlab.com/bmares/check-json5
-    rev: v1.0.0
-    hooks:
-    - id: check-json5
   # markdown のフォーマットチェック
   - repo: https://github.com/markdownlint/markdownlint
     rev: v0.11.0
