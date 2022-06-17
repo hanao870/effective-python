@@ -1,2 +1,2 @@
-# devcontainer-model-python
-VS Code の Remote Container で使用する Python 開発環境の雛形
+# effective-python
+書籍 [Effective Python 第2版](https://www.oreilly.co.jp/books/9784873119175/) の写経プロジェクト
