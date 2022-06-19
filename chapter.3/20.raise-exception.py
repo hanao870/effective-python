@@ -17,3 +17,9 @@ if __name__ == "__main__":
     result = _careful_divide(x, y)
     if result is None:
         print("Invalid inputs")
+
+    x, y = 0, 5
+    result = _careful_divide(x, y)
+    # None と 0 の判定となる
+    if not result:
+        print("Invalid inputs")
