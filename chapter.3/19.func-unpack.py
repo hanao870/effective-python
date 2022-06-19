@@ -14,6 +14,14 @@ def _my_function() -> tuple[int, int]:
     return 3, 4
 
 
+@func_name
+def _get_avg_ration(numbers: list[int]) -> list[float]:
+    average = sum(numbers) / len(numbers)
+    scaled = [x / average for x in numbers]
+    scaled.sort(reverse=True)
+    return scaled
+
+
 if __name__ == "__main__":
     lengths = [63, 73, 72, 60, 67, 66, 71, 61, 72, 70]
     minimum, maximum = _get_stats(lengths)
@@ -25,3 +33,9 @@ if __name__ == "__main__":
 
     first, second = _my_function()
     print(f"{first=}, {second=}")
+
+    # catch-all アンパック
+    longest, *middle, shortest = _get_avg_ration(lengths)
+    print(f"Longest:  {longest:>4.0%}")
+    print(f"Shortest: {shortest:>4.0%}")
+    print(f"Middle:   {middle}")
