@@ -7,6 +7,12 @@ def _remainder(number: int, divisor: int) -> int:
     return number % divisor
 
 
+@func_name
+def _print_parameter(**kwargs: float) -> None:
+    for key, value in kwargs.items():
+        print(f"{key} = {value}")
+
+
 if __name__ == "__main__":
     print(_remainder(20, 7))
 
@@ -32,3 +38,6 @@ if __name__ == "__main__":
     my_kwargs = {"number": 20}
     other_kwargs = {"divisor": 7}
     print(f"{_remainder(**my_kwargs, **other_kwargs)=}")
+
+    # キーワード引数
+    _print_parameter(alpha=1.5, beta=9, gamma=4)
