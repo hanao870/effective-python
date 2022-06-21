@@ -13,6 +13,11 @@ def _print_parameter(**kwargs: float) -> None:
         print(f"{key} = {value}")
 
 
+@func_name
+def _flow_rate(weight_diff: float, time_diff: int) -> float:
+    return weight_diff / time_diff
+
+
 if __name__ == "__main__":
     print(_remainder(20, 7))
 
@@ -41,3 +46,8 @@ if __name__ == "__main__":
 
     # キーワード引数
     _print_parameter(alpha=1.5, beta=9, gamma=4)
+
+    weight_diff = 0.5
+    time_diff = 3
+    flow = _flow_rate(weight_diff, time_diff)
+    print(f"{flow:.3} kg per second")
