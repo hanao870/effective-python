@@ -14,3 +14,8 @@ if __name__ == "__main__":
     print(_remainder(20, divisor=7))
     print(_remainder(number=20, divisor=7))
     print(_remainder(divisor=7, number=20))
+
+    # 位置引数はキーワード引数より前の位置で指定する
+    # print(_remainder(number=20, 7))
+    # 各引数は1回だけ指定できる
+    # print(_remainder(20, number=7))
