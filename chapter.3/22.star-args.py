@@ -26,3 +26,6 @@ if __name__ == "__main__":
 
     _log_1("My numbers are", 1, 2)
     _log_1("Hi there")
+
+    favorites = [7, 33, 99]
+    _log_1("Favorite colors", *favorites)
