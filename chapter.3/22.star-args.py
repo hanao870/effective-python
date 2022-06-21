@@ -22,6 +22,15 @@ def _log_1(message: str, *values: int) -> None:
         print(f"{message}: {value_str}")
 
 
+@func_name
+def _log_2(sequence: int, message: str, *values: int) -> None:
+    if not values:
+        print(f"{sequence} - {message}")
+    else:
+        values_str = ", ".join(str(x) for x in values)
+        print(f"{sequence} - {message} - {values_str}")
+
+
 def _my_generator() -> Iterator[int]:
     for i in range(10):
         yield i
@@ -46,3 +55,10 @@ if __name__ == "__main__":
     # ジェネレータの全要素が展開されるため、メモリが大量消費される.
     it = _my_generator()
     _my_func(*it)
+
+    # 可変長位置引数を含む関数の引数を変更したと想定.
+    # 可変長位置引数は引数の後ろとなるため、変更前の使い方はエラーとなる.
+    _log_2(1, "Favorites", 7, 33)
+    _log_2(1, "Hi there")
+    # 変更前の状態. 古い使い方は NG
+    # _log_2("Favorites", 7, 33)
