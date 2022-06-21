@@ -14,7 +14,7 @@ def _print_parameter(**kwargs: float) -> None:
 
 
 @func_name
-def _flow_rate(weight_diff: float, time_diff: int, period: int) -> float:
+def _flow_rate(weight_diff: float, time_diff: int, period: int = 1) -> float:
     return (weight_diff / time_diff) * period
 
 
@@ -51,3 +51,8 @@ if __name__ == "__main__":
     time_diff = 3
     flow_per_second = _flow_rate(weight_diff, time_diff, 1)
     print(f"{flow_per_second:.3} kg per second")
+
+    flow_per_second = _flow_rate(weight_diff, time_diff)
+    print(f"{flow_per_second:.3} kg per second")
+    flow_per_hour = _flow_rate(weight_diff, time_diff, period=3600)
+    print(f"{flow_per_hour} kg per hour")
