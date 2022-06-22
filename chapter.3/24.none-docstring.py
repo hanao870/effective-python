@@ -34,6 +34,26 @@ def _decode(data: str, default: dict[str, int] = {}) -> Any:
         return default
 
 
+@func_name
+def decode(data: str, default: dict[str, int] | None = None) -> Any:
+    """JSON 形式の文字列を読み込む.
+
+    Args:
+        data (str): JSON 形式文字列
+        default (dict[str, int] | None): 読込失敗時のデフォルト値.
+            デフォルトは空の辞書
+
+    Returns:
+        Any: 読み込んだ JSON データ.
+    """
+    try:
+        return json.loads(data)
+    except ValueError:
+        if default is None:
+            default = {}
+        return default
+
+
 if __name__ == "__main__":
     _log("Hi there!")
     sleep(0.5)
@@ -50,3 +70,12 @@ if __name__ == "__main__":
     bar["meep"] = 1
     print(f"Foo: {foo}")
     print(f"Bar: {bar}")
+
+    # 戻り値が異なるオブジェクトの辞書のため、
+    # _decode 関数で問題であったオブジェクトの共用を解消
+    foo_1: dict[str, int] = decode("bad data")
+    foo_1["stuff"] = 5
+    bar_1: dict[str, int] = decode("also bad")
+    bar_1["meep"] = 1
+    print(f"Foo: {foo_1}")
+    print(f"Bar: {bar_1}")
