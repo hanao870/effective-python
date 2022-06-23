@@ -17,3 +17,10 @@ if __name__ == "__main__":
     # 上記のリスト内包表記を map で再現
     alt = map(lambda x: x**2, a)
     print(f"{list(alt)=}")
+
+    even_squares = [x**2 for x in a if x % 2 == 0]
+    print(f"{even_squares=}")
+
+    # 上記リスト内包表記を map と filter で再現
+    alt = map(lambda x: x**2, filter(lambda x: x % 2 == 0, a))
+    print(f"{list(alt)=}")
