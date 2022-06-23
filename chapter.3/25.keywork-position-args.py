@@ -4,7 +4,10 @@ from my_libs.decolator import func_name
 
 @func_name
 def _safe_division(
-    number: float, divisor: int, ignore_overflow: bool, ignore_zero_division: bool
+    number: float,
+    divisor: int,
+    ignore_overflow: bool = False,
+    ignore_zero_division: bool = False,
 ) -> float:
     try:
         return number / divisor
@@ -25,4 +28,11 @@ if __name__ == "__main__":
     print(result)
 
     result = _safe_division(1.0, 0, False, True)
+    print(result)
+
+    # キーワード引数による例外フラグの切替
+    result = _safe_division(1.0, 10**500, ignore_overflow=True)
+    print(result)
+
+    result = _safe_division(1.0, 0, ignore_zero_division=True)
     print(result)
