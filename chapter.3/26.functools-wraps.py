@@ -40,3 +40,11 @@ def fibonacci(n: int) -> int:
 
 if __name__ == "__main__":
     fibonacci(4)
+
+    print(fibonacci)
+    help(fibonacci)
+
+    # デコレートされた元の関数の位置を特定できないためエラーとなる
+    # import pickle
+
+    # pickle.dumps(fibonacci)
