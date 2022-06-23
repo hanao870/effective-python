@@ -1,4 +1,5 @@
 """項目26:functools.wraps を使って関数デコレータを定義する."""
+from functools import wraps
 from typing import Callable, ParamSpec, TypeVar
 
 P = ParamSpec("P")  # パラメータ仕様変数. パラメータを表す型ヒント
@@ -15,6 +16,7 @@ def trace(f: Callable[P, R]) -> Callable[P, R]:
         Callable[P, R]: 呼び出し元関数オブジェクト
     """
 
+    @wraps(f)
     def wrapper(*args: P.args, **kwargs: P.kwargs) -> R:
         result = f(*args, **kwargs)
         print(f"{f.__name__}({args!r}, {kwargs!r}) -> {result!r}")
@@ -45,6 +47,7 @@ if __name__ == "__main__":
     help(fibonacci)
 
     # デコレートされた元の関数の位置を特定できないためエラーとなる
-    # import pickle
+    # functools.wraps を用いると解決する
+    import pickle
 
-    # pickle.dumps(fibonacci)
+    print(pickle.dumps(fibonacci))
