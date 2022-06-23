@@ -1,4 +1,5 @@
 """デコレータ."""
+from functools import wraps
 from typing import Callable, ParamSpec, TypeVar
 
 P = ParamSpec("P")  # パラメータ仕様変数. パラメータを表す型ヒント
@@ -14,6 +15,7 @@ def func_name(f: Callable[P, R]) -> Callable[P, R]:
         Callable[P, R]: 呼び出し元関数オブジェクト
     """
 
+    @wraps(f)
     def inner(*args: P.args, **kwargs: P.kwargs) -> R:
         print(f"Call {f.__name__}")
         print("-" * 50)
