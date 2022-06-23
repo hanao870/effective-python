@@ -68,6 +68,31 @@ def _safe_division_d(
             raise
 
 
+@func_name
+def _safe_division_e(
+    numerator: float,
+    denominator: int,
+    /,  # 位置専用引数の終了
+    ndigits: int = 10,  # 位置でもキーワードでも渡せる引数
+    *,  # キーワード専用引数の開始
+    ignore_overflow: bool = False,
+    ignore_zero_division: bool = False,
+) -> float:
+    try:
+        fraction = numerator / denominator
+        return round(fraction, ndigits)
+    except OverflowError:
+        if ignore_overflow:
+            return 0
+        else:
+            raise
+    except ZeroDivisionError:
+        if ignore_zero_division:
+            return float("inf")
+        else:
+            raise
+
+
 if __name__ == "__main__":
     result = _safe_division(1.0, 10**500, True, False)
     print(result)
@@ -95,4 +120,14 @@ if __name__ == "__main__":
     # 位置指定引数をキーワードで指定するとエラーとなる
     # result = _safe_division_d(numerator=2, denominator=5)
     result = _safe_division_d(2, 5)
+    print(result)
+
+    # 位置指定とキーワードで渡せる引数の動作確認
+    result = _safe_division_e(22, 7)
+    print(result)
+
+    result = _safe_division_e(22, 7, 5)
+    print(result)
+
+    result = _safe_division_e(22, 7, ndigits=2)
     print(result)
