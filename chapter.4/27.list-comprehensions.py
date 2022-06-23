@@ -24,3 +24,9 @@ if __name__ == "__main__":
     # 上記リスト内包表記を map と filter で再現
     alt = map(lambda x: x**2, filter(lambda x: x % 2 == 0, a))
     print(f"{list(alt)=}")
+
+    # 辞書と集合のリスト内包表記
+    even_squares_dict = {x: x**2 for x in a if x % 2 == 0}
+    three_cubed_set = {x**3 for x in a if x % 3 == 0}
+    print(f"{even_squares_dict=}")
+    print(f"{three_cubed_set=}")
