@@ -45,6 +45,29 @@ def _safe_division_c(
             raise
 
 
+@func_name
+def _safe_division_d(
+    numerator: float,
+    denominator: int,
+    /,  # 位置専用引数の終了
+    *,  # キーワード専用引数の開始
+    ignore_overflow: bool = False,
+    ignore_zero_division: bool = False,
+) -> float:
+    try:
+        return numerator / denominator
+    except OverflowError:
+        if ignore_overflow:
+            return 0
+        else:
+            raise
+    except ZeroDivisionError:
+        if ignore_zero_division:
+            return float("inf")
+        else:
+            raise
+
+
 if __name__ == "__main__":
     result = _safe_division(1.0, 10**500, True, False)
     print(result)
@@ -68,3 +91,8 @@ if __name__ == "__main__":
         result = _safe_division_c(1.0, 0)
     except ZeroDivisionError as e:
         print(e)
+
+    # 位置指定引数をキーワードで指定するとエラーとなる
+    # result = _safe_division_d(numerator=2, denominator=5)
+    result = _safe_division_d(2, 5)
+    print(result)
