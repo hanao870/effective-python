@@ -30,3 +30,9 @@ if __name__ == "__main__":
     three_cubed_set = {x**3 for x in a if x % 3 == 0}
     print(f"{even_squares_dict=}")
     print(f"{three_cubed_set=}")
+
+    alt_dict = dict(map(lambda x: (x, x**2), filter(lambda x: x % 2 == 0, a)))
+    alt_set = set(map(lambda x: x**3, filter(lambda x: x % 3 == 0, a)))
+
+    print(f"{alt_dict=}")
+    print(f"{alt_set=}")
