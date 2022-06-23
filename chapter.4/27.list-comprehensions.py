@@ -13,3 +13,7 @@ if __name__ == "__main__":
 
     squares_1 = [x**2 for x in a]
     print(f"{squares_1=}")
+
+    # 上記のリスト内包表記を map で再現
+    alt = map(lambda x: x**2, a)
+    print(f"{list(alt)=}")
