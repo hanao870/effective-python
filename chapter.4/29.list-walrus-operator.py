@@ -49,3 +49,16 @@ if __name__ == "__main__":
         name: tenth for name, count in stock.items() if (tenth := count // 10) > 0
     }
     print(f"{result=}")
+
+    # 変数のスコープはリスト内包表記外にも及ぶ
+    half = [
+        (squared := last**2) for count in stock.values() if (last := count // 2) > 10
+    ]
+    # flake8 では last と squared は未定義と判定される
+    # print(f"Last item of {half} is {last} ** 2 = {squared}")
+
+    # for ループ構造でも for の外にスコープが及ぶ
+    for count_for in stock.values():
+        last_for = count_for // 2
+        squared_for = last_for**2
+    print(f"{count_for} // 2 = {last_for}; {last_for} ** 2 = {squared_for}")
