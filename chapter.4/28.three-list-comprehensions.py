@@ -24,3 +24,12 @@ if __name__ == "__main__":
         for sublist2 in sublist1:
             my_flat.extend(sublist2)
     print(f"{my_flat=}")
+
+    # リスト内包表記は複数の if に対応している
+    a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    b = [x for x in a if x > 4 if x % 2 == 0]
+    c = [x for x in a if x > 4 and x % 2 == 0]
+
+    print(f"{a=}")
+    print(f"{b=}")
+    print(f"{c=}")
