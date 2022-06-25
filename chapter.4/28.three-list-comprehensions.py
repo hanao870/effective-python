@@ -33,3 +33,7 @@ if __name__ == "__main__":
     print(f"{a=}")
     print(f"{b=}")
     print(f"{c=}")
+
+    # 要素数が 3 で割り切れて行方向の和が 10 以上
+    filtered = [[x for x in row if x % 3 == 0] for row in matrix if sum(row) >= 10]
+    print(f"{filtered=}")
