@@ -68,3 +68,12 @@ if __name__ == "__main__":
     print(f"{half=}")
     # 未定義エラー
     # print(f"{count_list=}")
+
+    # イテレータの作成
+    found_itr = (
+        (name, batches)
+        for name in order
+        if (batches := _get_bathes(stock.get(name, 0), 8))
+    )
+    print(next(found_itr))
+    print(next(found_itr))
