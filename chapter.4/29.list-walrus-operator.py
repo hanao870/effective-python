@@ -28,3 +28,18 @@ if __name__ == "__main__":
         if _get_bathes(stock.get(name, 0), 8)
     }
     print(f"{found=}")
+
+    # 同じ関数呼び出しが2か所あるため、1か所の引数だけを変更する可能性がある
+    has_bug = {
+        name: _get_bathes(stock.get(name, 0), 4)
+        for name in order
+        if _get_bathes(stock.get(name, 0), 8)
+    }
+    print(f"{has_bug=}")
+
+    # 代入式で関数呼び出しを1回にする
+    found = {
+        name: batches
+        for name in order
+        if (batches := _get_bathes(stock.get(name, 0), 8))
+    }
