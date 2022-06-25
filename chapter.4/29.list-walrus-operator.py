@@ -1,11 +1,8 @@
 """項目29:代入式を使い内包表記の繰り返し作業をなくす."""
-from my_libs.decolator import func_name
-
 stock = {"nails": 125, "screws": 35, "wingnuts": 8, "washers": 24}
 order = ["screws", "wingnuts", "clips"]
 
 
-@func_name
 def _get_bathes(count: int, size: int) -> int:
     return count // size
 
@@ -43,3 +40,12 @@ if __name__ == "__main__":
         for name in order
         if (batches := _get_bathes(stock.get(name, 0), 8))
     }
+
+    # 内包表記の評価順によるエラー
+    # tenth は if の評価より後に定義される
+    # bug = {name: (tenth := count // 10) for name, count in stock.items() if tenth > 0}
+    # 代入式を if に移動させると解決
+    result = {
+        name: tenth for name, count in stock.items() if (tenth := count // 10) > 0
+    }
+    print(f"{result=}")
