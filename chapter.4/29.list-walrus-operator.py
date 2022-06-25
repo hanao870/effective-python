@@ -62,3 +62,9 @@ if __name__ == "__main__":
         last_for = count_for // 2
         squared_for = last_for**2
     print(f"{count_for} // 2 = {last_for}; {last_for} ** 2 = {squared_for}")
+
+    # 代入式を使わないリスト内包表記ではスコープは外部に及ばない
+    half = [count_list // 2 for count_list in stock.values()]
+    print(f"{half=}")
+    # 未定義エラー
+    # print(f"{count_list=}")
