@@ -17,3 +17,10 @@ if __name__ == "__main__":
     # ファイルサイズが大きいと、メモリを大量に消費する
     value = [len(x) for x in open(file_path)]
     print(value)
+
+    # リスト内包表記とジェネレータを組み合わせたジェネレータ式
+    it = (len(x) for x in open(file_path))
+    print(it)
+
+    for i in range(10):
+        print(f"{i}: {next(it)}")
