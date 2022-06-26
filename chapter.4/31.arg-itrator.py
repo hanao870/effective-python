@@ -1,4 +1,6 @@
 """項目31:引数に対してイテレータを使うときには確実さを優先する."""
+from pathlib import Path
+from typing import Iterator
 
 
 def _normalize(numbers: list[int]) -> list[float]:
@@ -12,7 +14,20 @@ def _normalize(numbers: list[int]) -> list[float]:
     return result
 
 
+def _read_visits(data_path: str) -> Iterator[int]:
+    with open(data_path) as f:
+        for line in f:
+            yield int(line)
+
+
 if __name__ == "__main__":
     visits = [15, 35, 80]
     percentages = _normalize(visits)
     print(f"{percentages=}, {sum(percentages)=}")
+
+    file_path = Path(__file__).parent / "my_numbers.txt"
+    it = _read_visits(str(file_path))
+    # total = sum(numbers) でイテレータが最後まで生成される.
+    # そのため、percentages は空のリストとなる.
+    # percentages = _normalize(it)
+    # print(percentages)
