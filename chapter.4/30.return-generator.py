@@ -32,3 +32,7 @@ if __name__ == "__main__":
     it = _index_word_iter(address)
     print(next(it))
     print(next(it))
+
+    # ジェネレータのリスト変換
+    result = list(_index_word_iter(address))
+    print(result[:10])
