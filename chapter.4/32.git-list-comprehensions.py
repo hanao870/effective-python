@@ -22,5 +22,10 @@ if __name__ == "__main__":
     it = (len(x) for x in open(file_path))
     print(it)
 
+    # for i in range(10):
+    #     print(f"{i}: {next(it)}")
+
+    # ジェネレータ式は組み合わせることが可能
+    roots = ((x, x**0.5) for x in it)
     for i in range(10):
-        print(f"{i}: {next(it)}")
+        print(f"{i}: {next(roots)}")
