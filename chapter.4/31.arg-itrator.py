@@ -20,6 +20,18 @@ def _read_visits(data_path: str) -> Iterator[int]:
             yield int(line)
 
 
+def _normalize_copy(numbers_itr: Iterator[int]) -> list[float]:
+    numbers = list(numbers_itr)  # イテレータを複製
+    total = sum(numbers)
+    result = []
+
+    for value in numbers:
+        percent = 100 * value / total
+        result.append(percent)
+
+    return result
+
+
 if __name__ == "__main__":
     visits = [15, 35, 80]
     percentages = _normalize(visits)
@@ -31,3 +43,7 @@ if __name__ == "__main__":
     # そのため、percentages は空のリストとなる.
     # percentages = _normalize(it)
     # print(percentages)
+
+    it = _read_visits(str(file_path))
+    percentages = _normalize_copy(it)
+    print(f"{percentages=}, {sum(percentages)=}")
