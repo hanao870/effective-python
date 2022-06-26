@@ -3,6 +3,28 @@ from pathlib import Path
 from typing import Callable, Iterator
 
 
+class ReadVisits:
+    """イテレータプロトコルを実装したコンテナクラス."""
+
+    def __init__(self, data_path: str) -> None:
+        """イニシャライザ.
+
+        Args:
+            data_path (str): 旅行者データを記録したファイル名
+        """
+        self.data_path = data_path
+
+    def __iter__(self) -> Iterator[int]:
+        """旅行者データを返すジェネレータ.
+
+        Yields:
+            Iterator[int]: `data_path` に記録された旅行者データ
+        """
+        with open(self.data_path) as f:
+            for line in f:
+                yield int(line)
+
+
 def _normalize(numbers: list[int]) -> list[float]:
     total = sum(numbers)
     result = []
@@ -43,6 +65,17 @@ def _normalize_func(get_iter: Callable[[], Iterator[int]]) -> list[float]:
     return result
 
 
+def _normalize_class(numbers: ReadVisits) -> list[float]:
+    total = sum(numbers)
+    result = []
+
+    for value in numbers:
+        percent = 100 * value / total
+        result.append(percent)
+
+    return result
+
+
 if __name__ == "__main__":
     N = 100
 
@@ -65,5 +98,11 @@ if __name__ == "__main__":
 
     # イテレータを生成する関数を渡す
     percentages = _normalize_func(lambda: _read_visits(str(file_path)))
+    print(f"{percentages=}, {sum(percentages)=}")
+    print("-" * N)
+
+    # コンテナクラスを使用
+    visits_cls = ReadVisits(str(file_path))
+    percentages = _normalize_class(visits_cls)
     print(f"{percentages=}, {sum(percentages)=}")
     print("-" * N)
