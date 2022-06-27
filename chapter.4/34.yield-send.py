@@ -30,6 +30,28 @@ def _my_generator() -> Generator[int, Optional[str], None]:
     print(f"{received=}")
 
 
+def _wave_modulating(steps: int) -> Generator[float, Optional[float], None]:
+    step_size = 2 * math.pi / steps
+    amplitude = yield 0.0  # 最初の振幅を受け取る
+
+    for step in range(steps):
+        radians = step * step_size
+        fraction = math.sin(radians)
+
+        if amplitude is None:
+            amplitude = 0.0
+
+        output = amplitude * fraction
+        amplitude = yield output  # 次の振幅を受け取る
+
+
+def _run_modulating(it: Generator[float, Optional[float], None]) -> None:
+    amplitudes = [None, 7, 7, 7, 2, 2, 2, 2, 10, 10, 10, 10, 10]
+    for amplitude in amplitudes:
+        output = it.send(amplitude)
+        _transmit(output)
+
+
 if __name__ == "__main__":
     _run(_wave(3.0, 8))
 
@@ -54,3 +76,5 @@ if __name__ == "__main__":
         it.send("hello!")  # ジェネレータに値を送信
     except StopIteration:
         pass
+
+    _run_modulating(_wave_modulating(12))
