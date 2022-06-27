@@ -58,6 +58,12 @@ def _complex_wave() -> Iterator[float]:
     yield from _wave(10.0, 5)
 
 
+def _complex_wave_modulating() -> Generator[float, Optional[float], None]:
+    yield from _wave_modulating(3)
+    yield from _wave_modulating(4)
+    yield from _wave_modulating(5)
+
+
 if __name__ == "__main__":
     _run(_wave(3.0, 8))
 
@@ -87,4 +93,7 @@ if __name__ == "__main__":
     print("-" * 50)
 
     _run(_complex_wave())
+    print("-" * 50)
+
+    _run_modulating(_complex_wave_modulating())
     print("-" * 50)
