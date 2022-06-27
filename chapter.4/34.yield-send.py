@@ -25,7 +25,7 @@ def _run(it: Iterator[float]) -> None:
         _transmit(output)
 
 
-def _my_generator() -> Generator[int, int, None]:
+def _my_generator() -> Generator[int, Optional[str], None]:
     received = yield 1
     print(f"{received=}")
 
@@ -43,3 +43,14 @@ if __name__ == "__main__":
         pass
     else:
         assert False
+
+    it = iter(_my_generator())
+    # 最初のジェネレータ出力取得
+    # yield 式がないため None 以外では例外が送出される
+    output = it.send(None)
+    print(f"{output=}")
+
+    try:
+        it.send("hello!")  # ジェネレータに値を送信
+    except StopIteration:
+        pass
