@@ -1,6 +1,6 @@
 """項目34:send でジェネレータにデータを注入するのはやめる."""
 import math
-from typing import Iterator, Optional
+from typing import Generator, Iterator, Optional
 
 
 def _wave(amplitude: float, steps: int) -> Iterator[float]:
@@ -25,5 +25,21 @@ def _run(it: Iterator[float]) -> None:
         _transmit(output)
 
 
+def _my_generator() -> Generator[int, int, None]:
+    received = yield 1
+    print(f"{received=}")
+
+
 if __name__ == "__main__":
     _run(_wave(3.0, 8))
+
+    it = iter(_my_generator())
+    output = next(it)  # 最初のジェネレータ出力を取得
+    print(f"{output=}")
+
+    try:
+        next(it)  # 終わるまでジェネレータ実行
+    except StopIteration:
+        pass
+    else:
+        assert False
