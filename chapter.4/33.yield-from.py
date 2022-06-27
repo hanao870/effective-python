@@ -31,5 +31,14 @@ def _run(func: Callable[[], Iterator[int | float]]) -> None:
         _render(delta)
 
 
+def _animate_composed() -> Iterator[int | float]:
+    yield from _move(4, 5.0)
+    yield from _pause(3)
+    yield from _move(2, 3.0)
+
+
 if __name__ == "__main__":
     _run(_animate)
+    print("-" * 50)
+
+    _run(_animate_composed)
