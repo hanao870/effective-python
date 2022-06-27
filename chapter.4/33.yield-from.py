@@ -1,4 +1,5 @@
 """項目33:yield from で複数のジェネレータを作る."""
+import timeit
 from typing import Callable, Iterator
 
 
@@ -37,8 +38,35 @@ def _animate_composed() -> Iterator[int | float]:
     yield from _move(2, 3.0)
 
 
+def _child() -> Iterator[int]:
+    for i in range(1_000_000):
+        yield i
+
+
+def _slow() -> Iterator[int]:
+    for i in _child():
+        yield i
+
+
+def _fast() -> Iterator[int]:
+    yield from _child()
+
+
 if __name__ == "__main__":
     _run(_animate)
     print("-" * 50)
 
     _run(_animate_composed)
+
+    # for ループの yield 処理時間計測
+    baseline = timeit.timeit(stmt="for _ in _slow(): pass", globals=globals(), number=2)
+    print(f"Manual nesting {baseline:.2f}s")
+
+    # yield from の処理時間計測
+    comparison = timeit.timeit(
+        stmt="for _ in _fast(): pass", globals=globals(), number=2
+    )
+    print(f"Composed nesting {comparison:.2f}s")
+
+    reduction = -(comparison - baseline) / baseline
+    print(f"{reduction:.1%} less time")
