@@ -64,6 +64,31 @@ def _complex_wave_modulating() -> Generator[float, Optional[float], None]:
     yield from _wave_modulating(5)
 
 
+def _wave_cascading(ampliude_it: Iterator[float], steps: int) -> Iterator[float]:
+    step_size = 2 * math.pi / steps
+
+    for step in range(steps):
+        radians = step * step_size
+        fraction = math.sin(radians)
+        amplitude = next(ampliude_it)  # 次の入力取得
+        output = amplitude * fraction
+        yield output
+
+
+def _complex_wave_cascading(amplitude_it: Iterator[float]) -> Iterator[float]:
+    yield from _wave_cascading(amplitude_it, 3)
+    yield from _wave_cascading(amplitude_it, 4)
+    yield from _wave_cascading(amplitude_it, 5)
+
+
+def _run_cascading() -> None:
+    amplitudes = [7, 7, 7, 2, 2, 2, 2, 10, 10, 10, 10, 10]
+    it = _complex_wave_cascading(iter(amplitudes))
+    for amplitude in amplitudes:
+        output = next(it)
+        _transmit(output)
+
+
 if __name__ == "__main__":
     _run(_wave(3.0, 8))
 
@@ -96,4 +121,7 @@ if __name__ == "__main__":
     print("-" * 50)
 
     _run_modulating(_complex_wave_modulating())
+    print("-" * 50)
+
+    _run_cascading()
     print("-" * 50)
