@@ -1,5 +1,5 @@
 """項目35:ジェネレータで throw による状態遷移を起こすのは避ける."""
-from typing import Generator
+from typing import Generator, Iterator
 
 
 class MyError(Exception):
@@ -12,6 +12,29 @@ class Reset(Exception):
     """タイマーリセット用例外."""
 
     pass
+
+
+class Timer:
+    """イテレータプロトコルを実装したコンテナクラス."""
+
+    def __init__(self, period: int) -> None:
+        """イニシャライザ.
+
+        Args:
+            period (int): タイマー周期
+        """
+        self.current = period
+        self.period = period
+
+    def reset(self) -> None:
+        """タイマーの周期をリセット."""
+        self.current = self.period
+
+    def __iter__(self) -> Iterator[int]:
+        """現在の秒を返すジェネレータ."""
+        while self.current:
+            self.current -= 1
+            yield self.current
 
 
 def _my_generator() -> Generator[int, None, None]:
@@ -85,6 +108,14 @@ def _run() -> None:
             _announce(current)
 
 
+def _run_1() -> None:
+    timer = Timer(4)
+    for current in timer:
+        if _check_for_reset():
+            timer.reset()
+        _announce(current)
+
+
 if __name__ == "__main__":
     it = _my_generator()
     print(next(it))
@@ -99,4 +130,7 @@ if __name__ == "__main__":
     print("-" * 50)
 
     _run()
+    print("-" * 50)
+
+    _run_1()
     print("-" * 50)
