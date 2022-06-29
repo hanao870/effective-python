@@ -83,3 +83,7 @@ if __name__ == "__main__":
     # 第2引数の要素数を取り出してできる全ての組み合わせを順不同で返す
     it_7 = itertools.combinations([1, 2, 3, 4], 2)
     print(f"itertools.combinations: {list(it_7)}")
+
+    # itertools.combinations に自身の要素を追加する
+    it_8 = itertools.combinations_with_replacement([1, 2, 3, 4], 2)
+    print(f"itertools.combinations_with_replacement: {list(it_8)}")
