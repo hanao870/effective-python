@@ -1,6 +1,11 @@
 """項目36:イテレータとジェネレータの作業では itertools を使う."""
 import itertools
 
+
+def _evens(x: int) -> bool:
+    return x % 2 == 0
+
+
 if __name__ == "__main__":
     it = itertools.chain([1, 2, 3], [4, 5, 6])
     print(list(it))
@@ -43,3 +48,11 @@ if __name__ == "__main__":
     # 第1引数の条件式が True を返すまでイテレータの要素をスキップする
     it_5 = itertools.dropwhile(lambda x: x < 7, values)
     print(f"itertools.dropwhile: {list(it_5)}")
+
+    # 第1引数の条件式が True の要素を返す
+    filter_result = filter(_evens, values)
+    print(f"filter: {list(filter_result)}")
+
+    # 第1引数の条件式が False の要素を返す
+    filter_false_result = itertools.filterfalse(_evens, values)
+    print(f"itertools.filterfalse] {list(filter_false_result)}")
