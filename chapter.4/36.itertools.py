@@ -68,3 +68,10 @@ if __name__ == "__main__":
 
     module_reduce = itertools.accumulate(values, _sum_modulo_20)
     print(f"Modulo: {list(module_reduce)}")
+
+    # 1つ以上のイテレータの要素の直積(全ての組み合わせ)を返す
+    single = itertools.product([1, 2], repeat=2)
+    print(f"Single: {list(single)}")
+
+    multiple = itertools.product([1, 2], ["a", "b", "c"])
+    print(f"Multiple: {list(multiple)}")
