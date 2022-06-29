@@ -6,6 +6,11 @@ def _evens(x: int) -> bool:
     return x % 2 == 0
 
 
+def _sum_modulo_20(first: int, second: int) -> int:
+    output = first + second
+    return output % 20
+
+
 if __name__ == "__main__":
     it = itertools.chain([1, 2, 3], [4, 5, 6])
     print(list(it))
@@ -56,3 +61,10 @@ if __name__ == "__main__":
     # 第1引数の条件式が False の要素を返す
     filter_false_result = itertools.filterfalse(_evens, values)
     print(f"itertools.filterfalse] {list(filter_false_result)}")
+
+    # イテレータに第2引数の値を適用する. 未指定の場合はイテレータの和を返す
+    sum_reduce = itertools.accumulate(values)
+    print(f"Sum: {list(sum_reduce)}")
+
+    module_reduce = itertools.accumulate(values, _sum_modulo_20)
+    print(f"Modulo: {list(module_reduce)}")
