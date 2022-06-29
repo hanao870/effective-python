@@ -75,3 +75,7 @@ if __name__ == "__main__":
 
     multiple = itertools.product([1, 2], ["a", "b", "c"])
     print(f"Multiple: {list(multiple)}")
+
+    # 第2引数の要素を取り出してできる順列を返す
+    it_6 = itertools.permutations([1, 2, 3, 4], 2)
+    print(f"itertools.permutations: {list(it_6)}")
