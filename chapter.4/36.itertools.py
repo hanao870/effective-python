@@ -11,3 +11,9 @@ if __name__ == "__main__":
     it_2 = itertools.cycle([1, 2, 3])
     result = [next(it_2) for _ in range(10)]
     print(result)
+
+    # 1つのイテレータを第2引数で指定した数のイテレータに分割する
+    it1, it2, it3 = itertools.tee(["first", "second", "third"], 3)
+    print(list(it1))
+    print(list(it2))
+    print(list(it3))
