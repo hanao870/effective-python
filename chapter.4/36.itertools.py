@@ -17,3 +17,14 @@ if __name__ == "__main__":
     print(list(it1))
     print(list(it2))
     print(list(it3))
+
+    keys = ["one", "two", "three"]
+    values = [1, 2]
+    # 要素数の少ないイテレータをまとめた tuple イテレータを返す
+    normal = list(zip(keys, values))
+    print(f"zip: {normal}")
+
+    # 要素数の多いイテレータをまとめた tuple イテレータを返す
+    it_3 = itertools.zip_longest(keys, values, fillvalue="nope")
+    longest = list(it_3)
+    print(f"zip_longest: {longest}")
