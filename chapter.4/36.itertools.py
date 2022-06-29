@@ -39,3 +39,7 @@ if __name__ == "__main__":
     # 第1引数の条件式が False を返すまでイテレータの要素を返す
     it_4 = itertools.takewhile(lambda x: x < 7, values)
     print(f"itertools.takewhile: {list(it_4)}")
+
+    # 第1引数の条件式が True を返すまでイテレータの要素をスキップする
+    it_5 = itertools.dropwhile(lambda x: x < 7, values)
+    print(f"itertools.dropwhile: {list(it_5)}")
