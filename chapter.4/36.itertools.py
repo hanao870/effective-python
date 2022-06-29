@@ -35,3 +35,7 @@ if __name__ == "__main__":
 
     middle_odds = itertools.islice(values, 2, 8, 2)
     print(f"Middle odds: {list(middle_odds)}")
+
+    # 第1引数の条件式が False を返すまでイテレータの要素を返す
+    it_4 = itertools.takewhile(lambda x: x < 7, values)
+    print(f"itertools.takewhile: {list(it_4)}")
