@@ -7,3 +7,7 @@ if __name__ == "__main__":
 
     it_1 = itertools.repeat("hello", 3)
     print(list(it_1))
+
+    it_2 = itertools.cycle([1, 2, 3])
+    result = [next(it_2) for _ in range(10)]
+    print(result)
