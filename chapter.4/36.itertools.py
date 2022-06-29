@@ -69,7 +69,7 @@ if __name__ == "__main__":
     module_reduce = itertools.accumulate(values, _sum_modulo_20)
     print(f"Modulo: {list(module_reduce)}")
 
-    # 1つ以上のイテレータの要素の直積(全ての組み合わせ)を返す
+    # 1つ以上のイテレータの要素の直積を返す
     single = itertools.product([1, 2], repeat=2)
     print(f"Single: {list(single)}")
 
@@ -79,3 +79,7 @@ if __name__ == "__main__":
     # 第2引数の要素を取り出してできる順列を返す
     it_6 = itertools.permutations([1, 2, 3, 4], 2)
     print(f"itertools.permutations: {list(it_6)}")
+
+    # 第2引数の要素数を取り出してできる全ての組み合わせを順不同で返す
+    it_7 = itertools.combinations([1, 2, 3, 4], 2)
+    print(f"itertools.combinations: {list(it_7)}")
