@@ -185,7 +185,7 @@ class Student:
         """生徒が選択している科目を返す.
 
         Args:
-            name (str): 生徒名
+            name (str): 科目名
 
         Returns:
             Subject: 生徒が選択している全科目
@@ -203,6 +203,38 @@ class Student:
             total += subject.average_grade()
             count += 1
         return total / count
+
+
+class Gradebook:
+    """生徒名をキーとした学生コンテナクラス."""
+
+    def __init__(self) -> None:
+        """イニシャライザ."""
+        self._students: dict[str, Student] = defaultdict(Student)
+
+    def get_student(self, name: str) -> Student:
+        """生徒情報を取得する.
+
+        Args:
+            name (str): 生徒名
+
+        Returns:
+            Student: 生徒情報
+        """
+        return self._students[name]
+
+
+def _call_refact_class() -> None:
+    book = Gradebook()
+    albert = book.get_student("Albert Einstein")
+    math = albert.get_subject("Math")
+    math.report_grade(75, 0.05)
+    math.report_grade(65, 0.15)
+    math.report_grade(70, 0.80)
+    gym = albert.get_subject("Gym")
+    gym.report_grade(100, 0.40)
+    gym.report_grade(85, 0.60)
+    print(albert.average_grade())
 
 
 if __name__ == "__main__":
@@ -230,3 +262,5 @@ if __name__ == "__main__":
     book2.repot_grade("Albert Einstein", "Gym", 100, 0.40)
     book2.repot_grade("Albert Einstein", "Gym", 85, 0.60)
     print(book2.average_grade("Albert Einstein"))
+
+    _call_refact_class()
