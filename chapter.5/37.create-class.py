@@ -174,6 +174,37 @@ class Subject:
         return total / total_weight
 
 
+class Student:
+    """学生が選択している科目を表すクラス."""
+
+    def __init__(self) -> None:
+        """イニシャライザ."""
+        self._subjects: dict[str, Subject] = defaultdict(Subject)
+
+    def get_subject(self, name: str) -> Subject:
+        """生徒が選択している科目を返す.
+
+        Args:
+            name (str): 生徒名
+
+        Returns:
+            Subject: 生徒が選択している全科目
+        """
+        return self._subjects[name]
+
+    def average_grade(self) -> float:
+        """全科目の平均点を返す.
+
+        Returns:
+            float: 全科目の平均点
+        """
+        total, count = 0.0, 0
+        for subject in self._subjects.values():
+            total += subject.average_grade()
+            count += 1
+        return total / count
+
+
 if __name__ == "__main__":
     book = SimpleGradebook()
     book.add_student("Isaac Newton")
