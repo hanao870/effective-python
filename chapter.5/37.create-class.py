@@ -1,5 +1,5 @@
 """項目37:組み込み型の深い入れ子にはせずクラスを作成する."""
-from collections import defaultdict
+from collections import defaultdict, namedtuple
 
 
 class SimpleGradebook:
@@ -140,6 +140,38 @@ class WeightedGradebook:
             score_count += 1
 
         return score_sum / score_count
+
+
+Grade = namedtuple("Grade", ("score", "weight"))
+
+
+class Subject:
+    """一つの科目を表すクラス."""
+
+    def __init__(self) -> None:
+        """イニシャライザ."""
+        self._grades: list[Grade] = []
+
+    def report_grade(self, score: int, weight: float) -> None:
+        """科目の成績と重みを追加する.
+
+        Args:
+            score (int): 成績
+            weight (float): 成績の重み
+        """
+        self._grades.append(Grade(score, weight))
+
+    def average_grade(self) -> float:
+        """全成績の平均点を計算する.
+
+        Returns:
+            float: 全成績の平均点
+        """
+        total, total_weight = 0.0, 0.0
+        for grade in self._grades:
+            total += grade.score * grade.weight
+            total_weight += grade.weight
+        return total / total_weight
 
 
 if __name__ == "__main__":
