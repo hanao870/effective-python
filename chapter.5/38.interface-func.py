@@ -7,6 +7,23 @@ def _log_missing() -> int:
     return 0
 
 
+def _increment_with_report(
+    current: dict[str, int], increments: list[tuple[str, int]]
+) -> tuple[dict[str, int], int]:
+    added_count = 0
+
+    def _missing() -> int:
+        nonlocal added_count  # ステートフルクロージャー
+        added_count += 1
+        return 0
+
+    result = defaultdict(_missing, current)
+    for key, amount in increments:
+        result[key] += amount
+
+    return result, added_count
+
+
 if __name__ == "__main__":
     names = ["Socrates", "Archimedes", "Plato", "Aristotle"]
     names.sort(key=len)
@@ -24,3 +41,6 @@ if __name__ == "__main__":
     for key, amount in increments:
         result[key] += amount
     print("After: ", dict(result))
+
+    result_1, count = _increment_with_report(current, increments)
+    print(f"{count=}, {dict(result_1)=}")
