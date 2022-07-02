@@ -24,6 +24,23 @@ def _increment_with_report(
     return result, added_count
 
 
+class CountMissing:
+    """未定義キーの数をカウントするクラス."""
+
+    def __init__(self) -> None:
+        """イニシャライザ."""
+        self.added = 0
+
+    def missing(self) -> int:
+        """未定義キーをカウントする.
+
+        Returns:
+            int: 未定義キーの初期値 0
+        """
+        self.added += 1
+        return 0
+
+
 if __name__ == "__main__":
     names = ["Socrates", "Archimedes", "Plato", "Aristotle"]
     names.sort(key=len)
@@ -44,3 +61,9 @@ if __name__ == "__main__":
 
     result_1, count = _increment_with_report(current, increments)
     print(f"{count=}, {dict(result_1)=}")
+
+    counter = CountMissing()
+    result_2 = defaultdict(counter.missing, current)  # メソッド参照
+    for key, amount in increments:
+        result_2[key] += amount
+    print(counter.added)
