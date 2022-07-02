@@ -88,3 +88,10 @@ if __name__ == "__main__":
     counter_1 = BetterCountMissing()
     print(f"{counter_1()=}")
     print(f"{callable(counter_1)=}")
+
+    counter_2 = BetterCountMissing()
+    result_3 = defaultdict(counter_2, current)  # __call_ を信頼する
+    for key, amount in increments:
+        result_3[key] += amount
+    print(f"{counter_2.added=}")
+    print(f"{result_3=}")
