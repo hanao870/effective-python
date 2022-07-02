@@ -41,6 +41,23 @@ class CountMissing:
         return 0
 
 
+class BetterCountMissing:
+    """CountMissing クラスの改良版."""
+
+    def __init__(self) -> None:
+        """イニシャライザ."""
+        self.added = 0
+
+    def __call__(self) -> int:
+        """未定義キーをカウントする.
+
+        Returns:
+            int: 未定義キーの初期値 0
+        """
+        self.added += 1
+        return 0
+
+
 if __name__ == "__main__":
     names = ["Socrates", "Archimedes", "Plato", "Aristotle"]
     names.sort(key=len)
@@ -67,3 +84,7 @@ if __name__ == "__main__":
     for key, amount in increments:
         result_2[key] += amount
     print(counter.added)
+
+    counter_1 = BetterCountMissing()
+    print(f"{counter_1()=}")
+    print(f"{callable(counter_1)=}")
