@@ -91,7 +91,7 @@ class PathInputData(GenericInputData):
 
 
 class Worker:
-    """ファイルデータを追加する基底クラス."""
+    """ファイルデータの改行をカウントする基底クラス."""
 
     def __init__(self, input_data: PathInputData) -> None:
         """イニシャライザ.
@@ -120,6 +120,63 @@ class Worker:
             NotImplementedError: 関数未実装
         """
         raise NotImplementedError
+
+
+U = TypeVar("U", bound="GenericWorker")
+
+
+class GenericWorker:
+    """ファイルデータの改行をカウントする基底クラス.
+
+    ジェネリック対応
+    """
+
+    def __init__(self, input_data: PathInputData) -> None:
+        """イニシャライザ.
+
+        Args:
+            input_data (PathInputData): ファイルデータ
+        """
+        self.input_data = input_data
+        self.result: int = 0
+
+    def map(self) -> None:
+        """ファイルデータを初期化する?.
+
+        Raises:
+            NotImplementedError: 関数未実装
+        """
+        raise NotImplementedError
+
+    def reduce(self, other: "Worker") -> None:
+        """ファイルデータを追加する.
+
+        Args:
+            other (int): ファイルデータ
+
+        Raises:
+            NotImplementedError: 関数未実装
+        """
+        raise NotImplementedError
+
+    @classmethod
+    def create_worker(
+        cls: Type[U], input_class: "GenericInputData", config: dict[str, str]
+    ) -> list[U]:
+        """`GenericWorker` クラス生成.
+
+        Args:
+            cls (Type[U]): 呼び出し元オブジェクト
+            input_class (GenericInputData): ファイル読込クラス
+            config (dict[str, str]): 引数名と引数の値のペア
+
+        Returns:
+            list[U]: ...
+        """
+        workers = []
+        for input_data in input_class.generate_inputs(config):
+            workers.append(cls(input_data))
+        return workers
 
 
 class LineCountWorker(Worker):
