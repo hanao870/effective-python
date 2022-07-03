@@ -148,7 +148,7 @@ class GenericWorker:
         """
         raise NotImplementedError
 
-    def reduce(self, other: "Worker") -> None:
+    def reduce(self, other: "GenericWorker") -> None:
         """ファイルデータを追加する.
 
         Args:
@@ -179,7 +179,7 @@ class GenericWorker:
         return workers
 
 
-class LineCountWorker(Worker):
+class LineCountWorker(GenericWorker):
     """ファイルデータの改行数をカウントするクラス."""
 
     def map(self) -> None:
@@ -187,7 +187,7 @@ class LineCountWorker(Worker):
         data = self.input_data.read()
         self.result = data.count("\n")
 
-    def reduce(self, other: "Worker") -> None:
+    def reduce(self, other: "GenericWorker") -> None:
         """`other` の改行数を追加する.
 
         Args:
@@ -231,6 +231,14 @@ def mapreduce(data_dir: str) -> int:
     inputs = _generate_inputs(data_dir)
     workers = _create_workers(inputs)
     return _execute(workers)
+
+
+def _mapreduce_generic(
+    worker_class: GenericWorker, input_class: GenericInputData, config: dict[str, str]
+) -> int:
+    # workers = worker_class.create_worker(input_class, config)
+    # return _execute(workers)
+    pass
 
 
 if __name__ == "__main__":
