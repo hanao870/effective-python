@@ -1,5 +1,7 @@
 """項目39:@classmethodポリモルフィズムを使ってオブジェクトをジェネリックに構築する."""
-from typing import TextIO
+import os
+from threading import Thread
+from typing import Iterator
 
 
 class InputData:
@@ -39,11 +41,11 @@ class PathInputData(InputData):
 class Worker:
     """ファイルデータを追加する基底クラス."""
 
-    def __init__(self, input_data: TextIO) -> None:
+    def __init__(self, input_data: PathInputData) -> None:
         """イニシャライザ.
 
         Args:
-            input_data (TextIO): ファイルデータ
+            input_data (PathInputData): ファイルデータ
         """
         self.input_data = input_data
         self.result: int = 0
@@ -83,3 +85,29 @@ class LineCountWorker(Worker):
             other (Worker): 追加するテキストデータ
         """
         self.result += other.result
+
+
+def _generate_inputs(data_dir: str) -> Iterator[PathInputData]:
+    for name in os.listdir(data_dir):
+        yield PathInputData(os.path.join(data_dir, name))
+
+
+def _create_workers(input_list: Iterator[PathInputData]) -> list[LineCountWorker]:
+    workers = []
+    for input_data in input_list:
+        workers.append(LineCountWorker(input_data))
+    return workers
+
+
+def _execute(workers: list[LineCountWorker]) -> int:
+    threads = [Thread(target=w.map) for w in workers]
+    for thread in threads:
+        thread.start()
+
+    for thread in threads:
+        thread.join()
+
+    first, *rest = workers
+    for worker in rest:
+        first.reduce(worker)
+    return first.result
