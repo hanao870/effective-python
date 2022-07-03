@@ -20,7 +20,6 @@ class InputData:
 
 
 T = TypeVar("T", bound="GenericInputData")
-U = TypeVar("U", bound="PathInputData")
 
 
 class GenericInputData:
@@ -38,7 +37,9 @@ class GenericInputData:
         raise NotImplementedError
 
     @classmethod
-    def generate_inputs(cls: Type[T], config: dict[str, str]) -> Iterator[U]:
+    def generate_inputs(
+        cls: Type[T], config: dict[str, str]
+    ) -> Iterator["PathInputData"]:
         """`GenericInputData` を生成する.
 
         Args:
@@ -49,12 +50,12 @@ class GenericInputData:
             NotImplementedError: 関数未定義
 
         Yields:
-            Iterator[PathInputData]: _description_
+            Iterator[PathInputData]: ファイル読込クラスインスタンス
         """
         raise NotImplementedError
 
 
-class PathInputData(InputData):
+class PathInputData(GenericInputData):
     """データファイルパスの読込クラス."""
 
     def __init__(self, path: str) -> None:
@@ -74,6 +75,19 @@ class PathInputData(InputData):
         """
         with open(self.path) as f:
             return f.read()
+
+    @classmethod
+    def generate_inputs(
+        cls: Type[T], config: dict[str, str]
+    ) -> Iterator["PathInputData"]:
+        """`PathInputData` クラスを生成する.
+
+        Yields:
+            Iterator[PathInputData]: ファイル読込クラスインスタンス
+        """
+        data_dir = config["data_dir"]
+        for name in os.listdir(data_dir):
+            yield PathInputData(os.path.join(data_dir, name))
 
 
 class Worker:
