@@ -4,7 +4,7 @@ import random
 import shutil
 from pathlib import Path
 from threading import Thread
-from typing import Iterator
+from typing import Iterator, Type, TypeVar
 
 
 class InputData:
@@ -15,6 +15,41 @@ class InputData:
 
         Raises:
             NotImplementedError: 関数未実装
+        """
+        raise NotImplementedError
+
+
+T = TypeVar("T", bound="GenericInputData")
+U = TypeVar("U", bound="PathInputData")
+
+
+class GenericInputData:
+    """入力データを表す基底クラス.
+
+    ジェネリック対応
+    """
+
+    def read(self) -> str:
+        """データの読み込み.
+
+        Raises:
+            NotImplementedError: 関数未実装
+        """
+        raise NotImplementedError
+
+    @classmethod
+    def generate_inputs(cls: Type[T], config: dict[str, str]) -> Iterator[U]:
+        """`GenericInputData` を生成する.
+
+        Args:
+            cls (Type[T]): GenericInputData クラスインスタンス
+            config (dict[str, str]): 引数名と引数の値のペア
+
+        Raises:
+            NotImplementedError: 関数未定義
+
+        Yields:
+            Iterator[PathInputData]: _description_
         """
         raise NotImplementedError
 
