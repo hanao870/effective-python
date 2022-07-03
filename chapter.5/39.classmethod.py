@@ -1,5 +1,8 @@
 """項目39:@classmethodポリモルフィズムを使ってオブジェクトをジェネリックに構築する."""
 import os
+import random
+import shutil
+from pathlib import Path
 from threading import Thread
 from typing import Iterator
 
@@ -122,3 +125,27 @@ def mapreduce(data_dir: str) -> int:
     inputs = _generate_inputs(data_dir)
     workers = _create_workers(inputs)
     return _execute(workers)
+
+
+if __name__ == "__main__":
+
+    def _write_test_files(tmpdir: str) -> None:
+        """動作確認用のテストファイルを作成する.
+
+        Args:
+            tmpdir (str): テストファイルを作成するディレクトリ. 絶対パス指定
+        """
+        if not os.path.isdir(tmpdir):
+            os.makedirs(tmpdir)
+
+        for i in range(100):
+            with open(os.path.join(tmpdir, str(i)), "w") as f:
+                f.write("\n" * random.randint(0, 100))
+
+    tmpdir = Path(__file__).parent / "tmp_dir"
+    _write_test_files(str(tmpdir))
+
+    result = mapreduce(str(tmpdir))
+    print(f"There are {result} lines")
+
+    shutil.rmtree(tmpdir)
