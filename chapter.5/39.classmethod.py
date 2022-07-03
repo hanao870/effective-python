@@ -111,3 +111,14 @@ def _execute(workers: list[LineCountWorker]) -> int:
     for worker in rest:
         first.reduce(worker)
     return first.result
+
+
+def mapreduce(data_dir: str) -> int:
+    """`data_dir` 内のファイルの改行数をカウントする.
+
+    Args:
+        data_dir (str): ファイルが保存されているディレクトリ
+    """
+    inputs = _generate_inputs(data_dir)
+    workers = _create_workers(inputs)
+    return _execute(workers)
