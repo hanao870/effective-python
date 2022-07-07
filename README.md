@@ -3,5 +3,3 @@
 
 サンプルプログラムは下記リポジトリを参照
 https://github.com/bslatkin/effectivepython
-
-mypy の型アノテーション付き
