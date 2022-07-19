@@ -125,6 +125,45 @@ class GoodWay(TimesSevenCorrect, PlusNineCorrect):
         super().__init__(value)
 
 
+class MyBaseClassOther:
+    """動作確認基底クラス."""
+
+    def __init__(self, value: float) -> None:
+        """イニシャライザ."""
+        print("Call MyBaseClassOther __init__")
+        self.value = value
+
+
+class ExplicitTrisect(MyBaseClassOther):
+    """関数 super の引数動作確認クラス."""
+
+    def __init__(self, value: float) -> None:
+        """イニシャライザ."""
+        # 第1引数はスーパークラスから見たクラスの型
+        # 第2引数は第1引数のクラスインスタンス
+        # super は基本的に引数無しで使用する
+        super(ExplicitTrisect, self).__init__(value)
+        self.value /= 3
+
+
+class AutomaticTrisect(MyBaseClassOther):
+    """関数 super の引数動作確認クラス."""
+
+    def __init__(self, value: float) -> None:
+        """イニシャライザ."""
+        super(self.__class__, self).__init__(value)
+        self.value /= 3
+
+
+class ImplicitTrisect(MyBaseClassOther):
+    """関数 super の引数動作確認クラス."""
+
+    def __init__(self, value: float) -> None:
+        """イニシャライザ."""
+        super().__init__(value)
+        self.value /= 3
+
+
 if __name__ == "__main__":
     foo = OneWay(5)
     print(f"First ordering is (5 * 2) + 5 = {foo.value}")
@@ -144,3 +183,7 @@ if __name__ == "__main__":
     # クラス呼び出し順 MRO(Method Resolution Order) の確認.
     mro_str = "\n".join(repr(cls) for cls in GoodWay.mro())
     print(mro_str)
+
+    print(f"ExplicitTrisect(9) is {ExplicitTrisect(9).value}")
+    print(f"AutomaticTrisect(9) is {AutomaticTrisect(9).value}")
+    print(f"ImplicitTrisect(9) is {ImplicitTrisect(9).value}")
