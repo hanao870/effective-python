@@ -60,6 +60,33 @@ class AnotherWay(MyBaseClass, PlusFive, TimesTwo):
         PlusFive.__init__(self)
 
 
+class TimesSeven(MyBaseClass):
+    """ひし形継承動作確認クラス."""
+
+    def __init__(self, value: int) -> None:
+        """イニシャライザ."""
+        MyBaseClass.__init__(self, value)
+        self.value *= 7
+
+
+class PlusNine(MyBaseClass):
+    """ひし形継承動作確認クラス."""
+
+    def __init__(self, value: int) -> None:
+        """イニシャライザ."""
+        MyBaseClass.__init__(self, value)
+        self.value += 9
+
+
+class ThisWay(TimesSeven, PlusNine):
+    """ひし形継承派生クラス."""
+
+    def __init__(self, value: int) -> None:
+        """イニシャライザ."""
+        TimesSeven.__init__(self, value)
+        PlusNine.__init__(self, value)
+
+
 if __name__ == "__main__":
     foo = OneWay(5)
     print(f"First ordering is (5 * 2) + 5 = {foo.value}")
@@ -67,3 +94,8 @@ if __name__ == "__main__":
     # 期待する結果は (5 + 5) * 2 = 20 だが 15 が表示される.
     bar = AnotherWay(5)
     print(f"Second ordering still is {bar.value}")
+
+    hoge = ThisWay(5)
+    # hoge.value は 14 となる.
+    # MyBaseClass.__init__ の2回呼び出しの為、値がリセットされる.
+    print(f"Should be (5 * 7) + 9 = 44 but is {hoge.value}")
