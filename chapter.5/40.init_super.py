@@ -49,6 +49,21 @@ class OneWay(MyBaseClass, TimesTwo, PlusFive):
         PlusFive.__init__(self)
 
 
+class AnotherWay(MyBaseClass, PlusFive, TimesTwo):
+    """フィールド value を操作する派生クラス."""
+
+    def __init__(self, value: int) -> None:
+        """イニシャライザ."""
+        # 基底クラスの並びと __init__ 呼び出しが異なる
+        MyBaseClass.__init__(self, value)
+        TimesTwo.__init__(self)
+        PlusFive.__init__(self)
+
+
 if __name__ == "__main__":
     foo = OneWay(5)
     print(f"First ordering is (5 * 2) + 5 = {foo.value}")
+
+    # 期待する結果は (5 + 5) * 2 = 20 だが 15 が表示される.
+    bar = AnotherWay(5)
+    print(f"Second ordering still is {bar.value}")
