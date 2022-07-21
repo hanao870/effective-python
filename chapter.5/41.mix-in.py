@@ -1,4 +1,5 @@
 """項目41:Mix-in クラスで機能合成を考える."""
+# import json
 from typing import Any, TypeVar
 
 
@@ -103,6 +104,84 @@ class NamedSubTree(ToDictMixin):
         self.tree_with_parent = tree_with_parent
 
 
+# W = TypeVar("W", bound="JsonMixin")
+
+
+# class JsonMixin:
+#     """JSON シリアライズの基底クラス."""
+
+#     @classmethod
+#     def from_json(cls: Type[W], data: str) -> W:
+#         """JsonMixin クラスオブジェクト生成.
+
+#         Args:
+#             cls (Type[W]): 呼び出し元オブジェクト
+#             data (str): JSON データ
+
+#         Returns:
+#             W: クラスオブジェクト
+#         """
+#         kwargs = json.loads(data)
+#         return cls(**kwargs)
+
+#     def to_json(self) -> str:
+#         """シリアライズした JSON データを返す.
+
+#         Returns:
+#             str: シリアライズした JSON データ
+#         """
+#         return json.dumps(self.to_dict())
+
+
+# class Switch(ToDictMixin, JsonMixin):
+#     """スイッチデータ保持クラス."""
+
+#     def __init__(self, ports: int | None = None, speed: float | None = None) -> None:
+#         """イニシャライザ.
+
+#         Args:
+#             ports (int | None, optional): ポート
+#             speed (float | None, optional): 速度
+#         """
+#         self.ports = ports
+#         self.speed = speed
+
+
+# class Machine(ToDictMixin, JsonMixin):
+#     """機械データ保持クラス."""
+
+#     def __init__(
+#         self,
+#         corse: int | None = None,
+#         ram: float | None = None,
+#         disk: float | None = None,
+#     ) -> None:
+#         """イニシャライザ.
+
+#         Args:
+#             corse (int | None, optional): 回転数
+#             ram (float | None, optional): RAM 容量
+#             disk (float | None, optional): DISK 容量
+#         """
+#         self.corse = corse
+#         self.ram = ram
+#         self.disk = disk
+
+
+# class DatacenterRack(ToDictMixin, JsonMixin):
+#     """データセンタートポロジーのデータを保持するクラス."""
+
+#     def __init__(self, switch: Any | None = None, machines: Any | None = None) -> None:
+#         """イニシャライザ.
+
+#         Args:
+#             switch (Switch | None, optional): スイッチデータ
+#             machine (Machine | None, optional): 機械データ
+#         """
+#         self.switch = Switch(**switch)
+#         self.machines = [Machine(**kwargs) for kwargs in machines]
+
+
 if __name__ == "__main__":
     tree = BinaryTree(
         10,
@@ -118,3 +197,16 @@ if __name__ == "__main__":
 
     # my_tree = NamedSubTree("foobar", root.left.right)
     # print(my_tree.to_dict())  # 無限ループにならない
+
+    serialized = """{
+    "switch": {"ports": 5, "speed": 1e9},
+    "machines": [
+        {"cores": 8, "ram": 32e9, "disk": 5e12},
+        {"cores": 4, "ram": 16e9, "disk": 1e12},
+        {"cores": 2, "ram": 4e9, "disk": 500e9}
+    ]
+    }"""
+
+    # deserialized = DatacenterRack.from_json(serialized)
+    # roundtrip = deserialized.to_json()
+    # assert json.loads(serialized) == json.loads(roundtrip)
