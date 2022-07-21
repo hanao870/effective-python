@@ -58,6 +58,37 @@ class BinaryTree(ToDictMixin):
         self.right = right
 
 
+V = TypeVar("V", bound="BinaryTreeWithParent")
+
+
+class BinaryTreeWithParent(BinaryTree):
+    """親への参照を保持する二分木クラス."""
+
+    def __init__(
+        self,
+        value: int,
+        left: U | None = None,
+        right: U | None = None,
+        parent: U | None = None,
+    ) -> None:
+        """イニシャライザ.
+
+        Args:
+            value (int): 値
+            left (U | None, optional): 辞書値その1
+            right (U | None, optional): 辞書値その2
+            parent (U | None, optional): 辞書値その3
+        """
+        super().__init__(value=value, left=left, right=right)
+        self.parent = parent
+
+    def _traverse(self, key: str, value: Any) -> Any:
+        if isinstance(value, BinaryTreeWithParent) and key == "parent":
+            return value.value  # サイクルを防ぐ
+        else:
+            return super()._traverse(key, value)
+
+
 if __name__ == "__main__":
     tree = BinaryTree(
         10,
@@ -65,3 +96,8 @@ if __name__ == "__main__":
         right=BinaryTree(13, left=BinaryTree(11)),
     )
     print(tree.to_dict())
+
+    # root = BinaryTreeWithParent(10)
+    # root.left = BinaryTreeWithParent(7, parent=root)
+    # root.left.right = BinaryTreeWithParent(9, parent=root.left)
+    # print(root.to_dict())
