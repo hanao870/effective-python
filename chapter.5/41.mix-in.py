@@ -89,6 +89,20 @@ class BinaryTreeWithParent(BinaryTree):
             return super()._traverse(key, value)
 
 
+class NamedSubTree(ToDictMixin):
+    """Mix-in テストクラス."""
+
+    def __init__(self, name: str, tree_with_parent: "BinaryTreeWithParent") -> None:
+        """イニシャライザ.
+
+        Args:
+            name (str): 名前
+            tree_with_parent (BinaryTreeWithParent): オブジェクト
+        """
+        self.name = name
+        self.tree_with_parent = tree_with_parent
+
+
 if __name__ == "__main__":
     tree = BinaryTree(
         10,
@@ -101,3 +115,6 @@ if __name__ == "__main__":
     # root.left = BinaryTreeWithParent(7, parent=root)
     # root.left.right = BinaryTreeWithParent(9, parent=root.left)
     # print(root.to_dict())
+
+    # my_tree = NamedSubTree("foobar", root.left.right)
+    # print(my_tree.to_dict())  # 無限ループにならない
