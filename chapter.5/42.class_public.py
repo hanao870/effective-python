@@ -66,8 +66,8 @@ class MyChildObject(MyParentObject):
         # return self._MyParentObject__private_field
 
 
-class MyStringClass:
-    """プライベートフィールドの動作確認クラス."""
+class MyBaseClass:
+    """プライベートフィールドを基底クラスへ移動した場合の動作確認クラス."""
 
     def __init__(self, value: int) -> None:
         """イニシャライザ.
@@ -77,27 +77,39 @@ class MyStringClass:
         """
         self.__value = value
 
-    def get_value(self) -> str:
+    def get_value(self) -> int | str:
+        """プライベートフィールド値を取得する.
+
+        Returns:
+            int: プライベートフィールド値
+        """
+        return self.__value
+
+
+class MyStringClass(MyBaseClass):
+    """プライベートフィールドの動作確認クラス."""
+
+    def get_value(self) -> int | str:
         """プライベートフィールド値を `str` に変換する.
 
         Returns:
             str: `str` 変換した値
         """
-        return str(self.__value)
+        return str(super().get_value())  # 更新済み
 
 
 class MyIntegerSubclass(MyStringClass):
     """基底クラスのプライベートフィールドアクセスの動作確認クラス."""
 
-    def get_value_int(self) -> int:
+    def get_value(self) -> int | str:
         """基底クラスのプライベートフィールド値を取得する.
 
         Returns:
             int: 基底クラスのプライベートフィールド値
         """
-        # 派生クラスから基底クラスのプライベートフィールドへアクセス可能
+        # プライベートフィールドが別の基底クラスへ移動したのでアクセスエラーとなる
         # 以下の方法で取得できるが mypy でエラーとなる...
-        # return int(self._MyStringClass__value)
+        # return int(self._MyStringClass__value)  # 更新していない...
         return 0
 
 
@@ -124,4 +136,4 @@ if __name__ == "__main__":
     hoge = MyStringClass(5)
     print(f"{hoge.get_value()=}")
     fuga = MyIntegerSubclass(50)
-    print(f"{fuga.get_value_int()=}")
+    print(f"{fuga.get_value()=}")
