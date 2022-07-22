@@ -43,6 +43,27 @@ class MyOtherObject:
         return instance.__private_field
 
 
+class MyParentObject:
+    """プライベートフィールド動作確認用基底クラス."""
+
+    def __init__(self) -> None:
+        """イニシャライザ."""
+        self.__private_field = 70
+
+
+class MyChildObject(MyParentObject):
+    """プライベートフィールド動作確認用派生クラス."""
+
+    def get_private_field(self) -> int:
+        """基底クラスのプライベートフィールド値を取得する.
+
+        Returns:
+            int: 基底クラスのプライベートフィールド値
+        """
+        # 基底クラスのプライベートフィールドの直接アクセスはエラー
+        return self.__private_field
+
+
 if __name__ == "__main__":
     foo = MyObject()
     print(f"{foo.public_field=}")
@@ -55,3 +76,6 @@ if __name__ == "__main__":
     bar = MyOtherObject()
     value = MyOtherObject.get_private_field_to_instance(bar)
     print(f"{value=}")
+
+    baz = MyChildObject()
+    value = baz.get_private_field()
