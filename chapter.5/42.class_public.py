@@ -113,6 +113,32 @@ class MyIntegerSubclass(MyStringClass):
         return 0
 
 
+class ApiClass:
+    """API の基底クラス."""
+
+    def __init__(self) -> None:
+        """イニシャライザ."""
+        self.__value = 5  # 派生クラスのフィールド名との衝突を避ける
+
+    def get(self) -> int:
+        """設定値を取得する.
+
+        Returns:
+            int: API 設定値
+        """
+        return self.__value
+
+
+class Child(ApiClass):
+    """API の派生クラス."""
+
+    def __init__(self) -> None:
+        """イニシャライザ."""
+        super().__init__()
+        # 保護フィールド
+        self._value = "hello"
+
+
 if __name__ == "__main__":
     foo = MyObject()
     print(f"{foo.public_field=}")
@@ -137,3 +163,6 @@ if __name__ == "__main__":
     print(f"{hoge.get_value()=}")
     fuga = MyIntegerSubclass(50)
     print(f"{fuga.get_value()=}")
+
+    a = Child()
+    print(f"{a.get()} and {a._value} are different")
