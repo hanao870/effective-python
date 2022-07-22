@@ -21,3 +21,7 @@ class MyObject:
 if __name__ == "__main__":
     foo = MyObject()
     print(f"{foo.public_field=}")
+
+    print(f"{foo.get_private_field()=}")
+    # プライベートフィールドの直接アクセスはエラー
+    # print(f"{foo.__private_field=}")
