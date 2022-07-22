@@ -1,4 +1,5 @@
 """項目42:プライベート属性よりパブリックな属性が好ましい."""
+from typing import Type, TypeVar
 
 
 class MyObject:
@@ -18,6 +19,30 @@ class MyObject:
         return self.__private_field
 
 
+U = TypeVar("U", bound="MyOtherObject")
+
+
+class MyOtherObject:
+    """クラスメソッドのプライベートフィールドアクセス."""
+
+    def __init__(self) -> None:
+        """イニシャライザ."""
+        self.__private_field = 71
+
+    @classmethod
+    def get_private_field_to_instance(cls: Type[U], instance: "MyOtherObject") -> int:
+        """プライベートフィールド値を取得する.
+
+        Args:
+            cls (Type[U]): 呼び出し元オブジェクト
+            instance (MyOtherObject): 値を取得するクラスインスタンス
+
+        Returns:
+            int: フィールド値
+        """
+        return instance.__private_field
+
+
 if __name__ == "__main__":
     foo = MyObject()
     print(f"{foo.public_field=}")
@@ -25,3 +50,8 @@ if __name__ == "__main__":
     print(f"{foo.get_private_field()=}")
     # プライベートフィールドの直接アクセスはエラー
     # print(f"{foo.__private_field=}")
+
+    # クラスメソッドからプライベートフィールド値取得
+    bar = MyOtherObject()
+    value = MyOtherObject.get_private_field_to_instance(bar)
+    print(f"{value=}")
