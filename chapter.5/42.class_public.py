@@ -66,6 +66,41 @@ class MyChildObject(MyParentObject):
         # return self._MyParentObject__private_field
 
 
+class MyStringClass:
+    """プライベートフィールドの動作確認クラス."""
+
+    def __init__(self, value: int) -> None:
+        """イニシャライザ.
+
+        Args:
+            value (int): 設定値
+        """
+        self.__value = value
+
+    def get_value(self) -> str:
+        """プライベートフィールド値を `str` に変換する.
+
+        Returns:
+            str: `str` 変換した値
+        """
+        return str(self.__value)
+
+
+class MyIntegerSubclass(MyStringClass):
+    """基底クラスのプライベートフィールドアクセスの動作確認クラス."""
+
+    def get_value_int(self) -> int:
+        """基底クラスのプライベートフィールド値を取得する.
+
+        Returns:
+            int: 基底クラスのプライベートフィールド値
+        """
+        # 派生クラスから基底クラスのプライベートフィールドへアクセス可能
+        # 以下の方法で取得できるが mypy でエラーとなる...
+        # return int(self._MyStringClass__value)
+        return 0
+
+
 if __name__ == "__main__":
     foo = MyObject()
     print(f"{foo.public_field=}")
@@ -85,3 +120,8 @@ if __name__ == "__main__":
     print(baz.__dict__)
     # プライベートフィールドは以下の名前で登録されている
     # baz._MyParentObject__private_field
+
+    hoge = MyStringClass(5)
+    print(f"{hoge.get_value()=}")
+    fuga = MyIntegerSubclass(50)
+    print(f"{fuga.get_value_int()=}")
