@@ -62,6 +62,8 @@ class MyChildObject(MyParentObject):
         """
         # 基底クラスのプライベートフィールドの直接アクセスはエラー
         return self.__private_field
+        # 以下の方法でプライベートフィールドにアクセスはできるが...
+        # return self._MyParentObject__private_field
 
 
 if __name__ == "__main__":
@@ -78,4 +80,8 @@ if __name__ == "__main__":
     print(f"{value=}")
 
     baz = MyChildObject()
-    value = baz.get_private_field()
+    # value = baz.get_private_field()
+    # オブジェクトの属性辞書を確認してプライベートフィールドの名前が確認できる
+    print(baz.__dict__)
+    # プライベートフィールドは以下の名前で登録されている
+    # baz._MyParentObject__private_field
